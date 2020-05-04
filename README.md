@@ -1,7 +1,7 @@
 # PocketNodeX
 
 ## What's This?
-PocketNodeX is a server software for Minecraft: Bedrock written in node.js, basically is based on PocketNode (a software discontinued based on PocketMine-MP).
+PocketNodeX is a server software for Minecraft: Bedrock written in node.js, based on PocketNode (a discontinued server software based on PocketMine-MP).
 
 ## Talk with us
 [Telegram](https://t.me/PocketNodeX)
@@ -15,10 +15,9 @@ PocketNodeX is a server software for Minecraft: Bedrock written in node.js, basi
 ## Missing features
 - [ ] New chunk format (NEED CONTRIBUTION).
 - [ ] Latest minecraft basic support (at the moment is just joinable with empty chunks).
-- [ ] Make levels support attached to worlds forlder (now it just generate every time a flat level).
-- [ ] Full player features (crunch, jump, swimming) handling.
-- [ ] player attributes.
-- [ ] find contributors
+- [ ] Attach levels support to worlds folder (for now generates a flat level every time).
+- [ ] Handling full player features (crunch, jump, swimming).
+- [ ] Player attributes.
 
 ## Done
 - [x] UUID 
@@ -27,7 +26,7 @@ PocketNodeX is a server software for Minecraft: Bedrock written in node.js, basi
 - [x] InteractPacket
 - [x] new Skins handling method
 
-## Running
+## Setup and Run.
 First Run:
 ```
 $ npm i && node start
@@ -36,4 +35,3 @@ $ npm i && node start
 Afterwards:
 ```
 $ node start
-
