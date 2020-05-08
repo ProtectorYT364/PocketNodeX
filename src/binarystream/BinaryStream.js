@@ -585,47 +585,6 @@ class BinaryStream {
     }
 
     /**
-     * Reads address from buffer
-     * @return {{ip: string, port: number, version: number}}
-     */
-    readAddress() {
-        let addr, port;
-        let version = this.readByte();
-        switch (version) {
-            default:
-            case 4:
-                addr = [];
-                for (let i = 0; i < 4; i++) {
-                    addr.push(this.readByte() & 0xff);
-                }
-                addr = addr.join(".");
-                port = this.readShort();
-                break;
-            // add ipv6 support
-        }
-        return {ip: addr, port: port, version: version};
-    }
-
-    /**
-     * Writes address to buffer
-     * @param addr    {string}
-     * @param port    {number}
-     * @param version {number}
-     * @return {BinaryStream}
-     */
-    writeAddress(addr, port, version = 4) {
-        this.writeByte(version);
-        switch (version) {
-            default:
-            case 4:
-                addr.split(".", 4).forEach(b => this.writeByte((Number(b)) & 0xff));
-                this.writeShort(port);
-                break;
-        }
-        return this;
-    }
-
-    /**
      * @param v {string}
      * @return {BinaryStream}
      */

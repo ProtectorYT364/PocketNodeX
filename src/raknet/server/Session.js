@@ -463,8 +463,8 @@ class Session {
             let splitId = this.splitId % 65536;
             let splitIndex = 0;
             let splitCount = Math.ceil(packet.getBuffer().length / maxSize);
-            while(!packet.getStream().feof()){
-                let stream = packet.getBuffer().slice(packet.getStream().offset, packet.getStream().offset += maxSize);
+            while(!packet.feof()){
+                let stream = packet.getBuffer().slice(packet.offset, packet.offset += maxSize);
                 let pk = new EncapsulatedPacket();
                 pk.splitId = splitId;
                 pk.hasSplit = true;

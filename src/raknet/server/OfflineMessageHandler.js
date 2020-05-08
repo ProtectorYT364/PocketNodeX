@@ -19,8 +19,6 @@ class OfflineMessageHandler {
             throw new Error("Expected OfflineMessage, got " + (packet.name ? packet.name : packet));
         }
 
-        console.log(packet.getId());
-
         let pk;
         switch (packet.getId()) {
             case UnconnectedPing.ID:

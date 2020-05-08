@@ -4,10 +4,16 @@ const MessageIdentifiers = require("./MessageIdentifiers");
 class UnconnectedPing extends OfflineMessage {
     static ID = MessageIdentifiers.ID_UNCONNECTED_PING;
 
-    pingId;
+    /** @type {number} */
+    pingID;
+
+    encodePayload() {
+        this.writeLong(this.pingID);
+        this.writeMagic();
+    }
 
     decodePayload() {
-        this.pingId = this.readLong();
+        this.pingID = this.readLong();
         this.readMagic();
     }
 }

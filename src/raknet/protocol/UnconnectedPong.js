@@ -5,17 +5,24 @@ class UnconnectedPong extends OfflineMessage {
     static ID = MessageIdentifiers.ID_UNCONNECTED_PONG;
 
     /** @type {number} */
-    sendPingTime;
+    pingID;
     /** @type {number} */
-    serverId;
+    serverID;
     /** @type {string} */
     serverName;
 
     encodePayload() {
-        this.writeLong(this.pingId);
-        this.writeLong(this.serverId);
+        this.writeLong(this.pingID);
+        this.writeLong(this.serverID);
         this.writeMagic();
         this.writeString(this.serverName);
+    }
+
+    decodePayload() {
+        this.pingID = this.readLong();
+        this.serverID = this.readLong();
+        this.readMagic();
+        this.serverName = this.readString();
     }
 }
 
