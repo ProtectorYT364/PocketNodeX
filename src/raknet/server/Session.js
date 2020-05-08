@@ -309,7 +309,7 @@ class Session {
         switch(id){
             case ConnectionRequest.getId():
                 this.sessionManager.getLogger().debug("Got ConnectionRequest from "+this);
-                dpk = new ConnectionRequest(packet.getStream());
+                dpk = new ConnectionRequest(packet.getBuffer());
                 dpk.decode();
 
                 this.clientId = dpk.clientId;
@@ -325,7 +325,7 @@ class Session {
             case NewIncomingConnection.getId():
                 this.sessionManager.getLogger().debug("Got NewIncomingConnection from "+this);
 
-                dpk = new NewIncomingConnection(packet.getStream());
+                dpk = new NewIncomingConnection(packet.getBuffer());
                 dpk.decode();
 
                 if(dpk.port === this.sessionManager.getPort()){ //todo: if port checking
@@ -338,7 +338,7 @@ class Session {
                 break;
 
             case ConnectedPing.getId():
-                dpk = new ConnectedPing(packet.getStream());
+                dpk = new ConnectedPing(packet.getBuffer());
                 dpk.decode();
 
                 pk = new ConnectedPong();
@@ -348,7 +348,7 @@ class Session {
                 break;
 
             case ConnectedPong.getId():
-                dpk = new ConnectedPong(packet.getStream());
+                dpk = new ConnectedPong(packet.getBuffer());
                 dpk.decode();
 
                 this.handlePong(dpk.sendPingTime, dpk.sendPongTime);

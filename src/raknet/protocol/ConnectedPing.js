@@ -2,22 +2,16 @@ const Packet = require("./Packet");
 const MessageIdentifiers = require("./MessageIdentifiers");
 
 class ConnectedPing extends Packet {
-    constructor(stream) {
-        super(stream);
-        this.sendPingTime = -1;
-    }
+    static ID = MessageIdentifiers.ID_CONNECTED_PING;
 
-    static getId() {
-        return MessageIdentifiers.ID_CONNECTED_PING;
-    }
+    sendPingTime;
 
     encodePayload() {
-        this.getStream()
-            .writeLong(this.sendPingTime);
+        this.writeLong(this.sendPingTime);
     }
 
     decodePayload() {
-        this.sendPingTime = this.getStream().readLong();
+        this.sendPingTime = this.readLong();
     }
 }
 

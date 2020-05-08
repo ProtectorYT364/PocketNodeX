@@ -81,13 +81,11 @@ class SessionManager {
                 return;
             }
 
-            let stream = new BinaryStream(msg);
-
-            let packetId = stream.getBuffer()[0];
+            let packetId = msg[0];
 
             //this.logger.debug("Received", packetId, "with length of", msg.length, "from", rinfo.address + ":" + rinfo.port);
 
-            this.handle(packetId, stream, rinfo.address, rinfo.port);
+            this.handle(packetId, msg, rinfo.address, rinfo.port);
         });
 
         this.tickProcessor();
@@ -171,7 +169,7 @@ class SessionManager {
         }
 
         // this.getLogger().debug("Sent "+packet.constructor.name+"("+packet.stream.buffer.toString("hex")+") to "+address+":"+port);
-        // console.log("Sent "+packet.constructor.name+"("+packet.stream.buffer.toString("hex")+") to "+address+":"+port);
+        // console.log("Sent "+packet.constructor.name+"("+packet.buffer.toString("hex")+") to "+address+":"+port);
     }
 
     createSession(address, port, clientId, mtuSize) {

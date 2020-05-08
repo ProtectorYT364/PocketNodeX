@@ -3,13 +3,10 @@ const Packet = require("./Packet");
 const BinaryStream = require("../../binarystream/BinaryStream");
 
 class AcknowledgementPacket extends Packet {
-    constructor(stream) {
-        super(stream);
-        this.packets = [];
-    }
-
     static RECORD_TYPE_RANGE = 0;
     static RECORD_TYPE_SINGLE = 1;
+
+    packets = [];
 
     encodePayload() {
         let payload = new BinaryStream();
@@ -55,18 +52,18 @@ class AcknowledgementPacket extends Packet {
             records++;
         }
 
-        this.getStream().writeShort(records);
-        this.getStream().append(payload.getBuffer());
+        this.writeShort(records);
+        this.append(payload.getBuffer());
     }
 
     decodePayload() {
-        let count = this.getStream().readShort();
+        let count = this.readShort();
         this.packets = [];
         let cnt = 0;
-        for (let i = 0; i < count && !this.getStream().feof() && cnt < 4096; i++) {
-            if (this.getStream().readByte() === AcknowledgementPacket.RECORD_TYPE_RANGE) {
-                let start = this.getStream().readLTriad();
-                let end = this.getStream().readLTriad();
+        for (let i = 0; i < count && !this.feof() && cnt < 4096; i++) {
+            if (this.readByte() === AcknowledgementPacket.RECORD_TYPE_RANGE) {
+                let start = this.readLTriad();
+                let end = this.readLTriad();
                 if ((end - start) > 512) {
                     end = start + 512;
                 }
@@ -74,9 +71,15 @@ class AcknowledgementPacket extends Packet {
                     this.packets[cnt++] = c;
                 }
             } else {
-                this.packets[cnt++] = this.getStream().readLTriad();
+                this.packets[cnt++] = this.readLTriad();
             }
         }
+    }
+
+    clean() {
+        this.packets = [];
+
+        return super.clean();
     }
 }
 module.exports = AcknowledgementPacket;

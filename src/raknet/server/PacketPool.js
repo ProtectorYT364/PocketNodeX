@@ -9,7 +9,7 @@ class PacketPool extends Map {
     }
 
     registerPacket(packet) {
-        this.set(packet.getId(), packet);
+        this.set(packet.ID, packet);
     }
 
     getPacket(id) {

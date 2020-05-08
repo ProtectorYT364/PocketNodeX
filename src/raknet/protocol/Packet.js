@@ -1,20 +1,10 @@
 const BinaryStream = require("../../binarystream/BinaryStream");
 
-class Packet {
-    constructor(stream) {
-        if (stream instanceof BinaryStream) {
-            this.stream = stream;
-        } else {
-            this.stream = new BinaryStream();
-        }
-    }
-
-    static getId() {
-        return -1;
-    }
+class Packet extends BinaryStream{
+    static ID = 0x00;
 
     getId() {
-        return this.constructor.getId();
+        return this.constructor.ID;
     }
 
     encode() {
@@ -23,7 +13,7 @@ class Packet {
     }
 
     encodeHeader() {
-        this.getStream().writeByte(this.getId());
+        this.writeByte(this.getId());
     }
 
     encodePayload() {
@@ -35,7 +25,7 @@ class Packet {
     }
 
     decodeHeader() {
-        this.getStream().readByte();
+        this.readByte();
     }
 
     decodePayload() {
@@ -43,16 +33,16 @@ class Packet {
 
     /** @param v {string} */
     writeString(v) {
-        this.getStream().writeShort(v.length);
-        this.getStream().append(Buffer.from(v, "utf8"));
+        this.writeShort(v.length);
+        this.append(Buffer.from(v, "utf8"));
     }
 
     getStream() {
-        return this.stream;
+        return this;
     }
 
     getBuffer() {
-        return this.stream.buffer;
+        return this.buffer;
     }
 }
 

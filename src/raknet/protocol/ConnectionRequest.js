@@ -2,32 +2,22 @@ const Packet = require("./Packet");
 const MessageIdentifiers = require("./MessageIdentifiers");
 
 class ConnectionRequest extends Packet {
-    constructor(stream) {
-        super(stream);
-        this.initVars();
-    }
+    static ID = MessageIdentifiers.ID_CONNECTION_REQUEST;
 
-    static getId() {
-        return MessageIdentifiers.ID_CONNECTION_REQUEST;
-    }
-
-    initVars() {
-        this.clientId = -1;
-        this.sendPingTime = 0;
-        this.useSecurity = false;
-    }
+    clientId;
+    sendPingTime = 0;
+    useSecurity = false;
 
     encodePayload() {
-        this.getStream()
-            .writeLong(this.clientId)
-            .writeLong(this.sendPingTime)
-            .writeBool(this.useSecurity);
+        this.writeLong(this.clientId);
+        this.writeLong(this.sendPingTime);
+        this.writeBool(this.useSecurity);
     }
 
     decodePayload() {
-        this.clientId = this.getStream().readLong();
-        this.sendPingTime = this.getStream().readLong();
-        this.useSecurity = this.getStream().readBool();
+        this.clientId = this.readLong();
+        this.sendPingTime = this.readLong();
+        this.useSecurity = this.readBool();
     }
 }
 

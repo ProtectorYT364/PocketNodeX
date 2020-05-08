@@ -2,9 +2,7 @@ const OfflineMessage = require("./OfflineMessage");
 const MessageIdentifiers = require("./MessageIdentifiers");
 
 class UnconnectedPong extends OfflineMessage {
-    static getId() {
-        return MessageIdentifiers.ID_UNCONNECTED_PONG;
-    }
+    static ID = MessageIdentifiers.ID_UNCONNECTED_PONG;
 
     /** @type {number} */
     sendPingTime;
@@ -14,8 +12,8 @@ class UnconnectedPong extends OfflineMessage {
     serverName;
 
     encodePayload() {
-        this.getStream().writeLong(this.pingId);
-        this.getStream().writeLong(this.serverId);
+        this.writeLong(this.pingId);
+        this.writeLong(this.serverId);
         this.writeMagic();
         this.writeString(this.serverName);
     }

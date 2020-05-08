@@ -361,7 +361,7 @@ class Player extends Human {
         this._randomClientId = packet.clientId;
 
         this._uuid = UUID.fromString(packet.clientUUID);
-        // this._rawUUID = this._uuid.toBinary(); to fix
+        this._rawUUID = this._uuid.toBinary().getBuffer().toString();
 
         let animations = [];
         packet.clientData['AnimatedImageData'].forEach(animation => {

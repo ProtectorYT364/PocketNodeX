@@ -2,29 +2,19 @@ const Packet = require("./Packet");
 const MessageIdentifiers = require("./MessageIdentifiers");
 
 class ConnectedPong extends Packet {
-    constructor(stream) {
-        super(stream);
-        this.initVars();
-    }
+    static ID = MessageIdentifiers.ID_CONNECTED_PONG;
 
-    static getId() {
-        return MessageIdentifiers.ID_CONNECTED_PONG;
-    }
-
-    initVars() {
-        this.sendPingTime = -1;
-        this.sendPongTime = -1;
-    }
+    sendPingTime;
+    sendPongTime;
 
     encodePayload() {
-        this.getStream()
-            .writeLong(this.sendPingTime)
-            .writeLong(this.sendPongTime);
+        this.writeLong(this.sendPingTime);
+        this.writeLong(this.sendPongTime);
     }
 
     decodePayload() {
-        this.sendPingTime = this.getStream().readLong();
-        this.sendPongTime = this.getStream().readLong();
+        this.sendPingTime = this.readLong();
+        this.sendPongTime = this.readLong();
     }
 }
 

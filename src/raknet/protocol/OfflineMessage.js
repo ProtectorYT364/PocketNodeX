@@ -2,17 +2,14 @@ const Packet = require("./Packet");
 const RakNet = require("../RakNet");
 
 class OfflineMessage extends Packet {
-    constructor(stream) {
-        super(stream);
-        this.magic = "";
-    }
+    magic;
 
     readMagic() {
-        this.magic = this.getBuffer().slice(this.getStream().offset, this.getStream().increaseOffset(16, true));
+        this.magic = this.getBuffer().slice(this.offset, this.increaseOffset(16, true));
     }
 
     writeMagic() {
-        this.getStream().append(Buffer.from(RakNet.MAGIC, "binary"));
+        this.append(Buffer.from(RakNet.MAGIC, "binary"));
     }
 
     isValid() {

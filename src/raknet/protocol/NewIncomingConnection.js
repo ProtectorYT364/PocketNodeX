@@ -2,45 +2,31 @@ const Packet = require("./Packet");
 const MessageIdentifiers = require("./MessageIdentifiers");
 
 class NewIncomingConnection extends Packet {
-    constructor(stream) {
-        super(stream);
-        this.initVars();
-    }
+    static ID = MessageIdentifiers.ID_NEW_INCOMING_CONNECTION;
 
-    static getId() {
-        return MessageIdentifiers.ID_NEW_INCOMING_CONNECTION;
-    }
-
-    initVars() {
-        this.address = "";
-        this.port = -1;
-
-        this.systemAddresses = [];
-
-        this.sendPingTime = -1;
-        this.sendPongTime = -1;
-    }
-
-    encodePayload() {
-    }
+    address;
+    port;
+    systemAddresses = [];
+    sendPingTime;
+    sendPongTime;
 
     decodePayload() {
-        let addr = this.getStream().readAddress();
+        let addr = this.readAddress();
         this.address = addr.ip;
         this.port = addr.port;
 
         let stopOffset = this.getBuffer().length - 16;
         for (let i = 0; i < 20; ++i) {
-            if (this.getStream().offset >= stopOffset) {
+            if (this.offset >= stopOffset) {
                 this.systemAddresses.push(["0.0.0.0", 0, 4]);
             } else {
-                let addr = this.getStream().readAddress();
+                let addr = this.readAddress();
                 this.systemAddresses.push([addr.ip, addr.port, addr.version]);
             }
         }
 
-        this.sendPingTime = this.getStream().readLong();
-        this.sendPongTime = this.getStream().readLong();
+        this.sendPingTime = this.readLong();
+        this.sendPongTime = this.readLong();
     }
 }
 

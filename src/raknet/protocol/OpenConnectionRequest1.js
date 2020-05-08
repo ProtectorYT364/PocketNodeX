@@ -2,24 +2,15 @@ const OfflineMessage = require("./OfflineMessage");
 const MessageIdentifiers = require("./MessageIdentifiers");
 
 class OpenConnectionRequest1 extends OfflineMessage {
-    constructor(stream) {
-        super(stream);
-        this.initVars();
-    }
+    static ID = MessageIdentifiers.ID_OPEN_CONNECTION_REQUEST_1;
 
-    static getId() {
-        return MessageIdentifiers.ID_OPEN_CONNECTION_REQUEST_1;
-    }
-
-    initVars() {
-        this.protocolVersion = -1;
-        this.mtuSize = -1;
-    }
+    protocolVersion;
+    mtuSize;
 
     decodePayload() {
         this.readMagic();
-        this.protocolVersion = this.getStream().readByte();
-        this.mtuSize = this.getBuffer().slice(this.getStream().getOffset()).length + 18;
+        this.protocolVersion = this.readByte();
+        this.mtuSize = this.getBuffer().slice(this.offset).length + 18;
     }
 }
 

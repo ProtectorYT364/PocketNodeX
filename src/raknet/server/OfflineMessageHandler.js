@@ -21,7 +21,7 @@ class OfflineMessageHandler {
 
         let pk;
         switch (packet.getId()) {
-            case UnconnectedPing.getId():
+            case UnconnectedPing.ID:
                 pk = new UnconnectedPong();
                 pk.serverName = this.sessionManager.getServerName().toString();
                 pk.serverId = this.sessionManager.getId();
@@ -29,8 +29,9 @@ class OfflineMessageHandler {
                 this.sessionManager.sendPacket(pk, address, port);
                 return true;
 
-            case OpenConnectionRequest1.getId():
+            case OpenConnectionRequest1.ID:
                 if (packet.protocolVersion !== RakNet.PROTOCOL) {
+                    console.log(packet.protocolVersion);
                     pk = new IncompatibleProtocolVersion();
                     pk.protocolVersion = RakNet.PROTOCOL;
                     pk.serverId = this.sessionManager.getId();
@@ -43,8 +44,8 @@ class OfflineMessageHandler {
                 this.sessionManager.sendPacket(pk, address, port);
                 return true;
 
-            case OpenConnectionRequest2.getId():
-                if (packet.serverPort === this.sessionManager.getPort()) {
+            case OpenConnectionRequest2.ID:
+                if (packet.serverPort === this.sessionManager.getPort() || true /* port checking */ ) {
                     let mtuSize = Math.min(Math.abs(packet.mtuSize), 1464);
                     pk = new OpenConnectionReply2();
                     pk.serverId = this.sessionManager.getId();
