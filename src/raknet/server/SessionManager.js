@@ -164,16 +164,14 @@ class SessionManager {
         packet.encode();
         if (address instanceof Session) {
             this._bytes.sent += this._socket.sendBuffer(packet.getBuffer(), address.address, address.port);
-            console.log("Sent "+packet.constructor.name+"("+packet.buffer.toString("hex")+") to "+address.address+":"+address.port);
+            // console.log("Sent "+packet.constructor.name+"("+packet.buffer.toString("hex")+") to "+address.address+":"+address.port);
         } else {
-            console.log("addr " + address);
-            console.log("port " + port);
             if (typeof address.address !== "undefined") {
                 this._bytes.sent += this._socket.sendBuffer(packet.getBuffer(), address.address, port);
-                console.log("Sent "+packet.constructor.name+"("+packet.buffer.toString("hex")+") to "+address.address+":"+port);
+                // console.log("Sent "+packet.constructor.name+"("+packet.buffer.toString("hex")+") to "+address.address+":"+port);
             }else{
                 this._bytes.sent += this._socket.sendBuffer(packet.getBuffer(), address, port);
-                console.log("Sent "+packet.constructor.name+"("+packet.buffer.toString("hex")+") to "+address+":"+port);
+                // console.log("Sent "+packet.constructor.name+"("+packet.buffer.toString("hex")+") to "+address+":"+port);
             }
         }
 

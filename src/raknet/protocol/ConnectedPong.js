@@ -4,7 +4,9 @@ const MessageIdentifiers = require("./MessageIdentifiers");
 class ConnectedPong extends Packet {
     static ID = MessageIdentifiers.ID_CONNECTED_PONG;
 
+    /** @type {number} */
     sendPingTime;
+    /** @type {number} */
     sendPongTime;
 
     encodePayload() {

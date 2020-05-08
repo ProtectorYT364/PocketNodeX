@@ -50,7 +50,7 @@ class Session {
 
     address;
     port;
-    state = Session.STATE_DISCONNECTED;
+    state = Session.STATE_CONNECTING;
     mtuSize = 548;
     clientId;
     splitId;
@@ -305,68 +305,54 @@ class Session {
         }
 
         let id = packet.getBuffer()[0];
-        let dpk, pk;
-        switch(id){
-            case ConnectionRequest.ID:
-                this.sessionManager.getLogger().debug("Got ConnectionRequest from "+this);
-                dpk = new ConnectionRequest(packet.getBuffer());
-                dpk.decode();
+        let dataPacket, pk;
+        if (id < MessageIdentifiers.ID_USER_PACKET_ENUM) {
+            if (this.state === Session.STATE_CONNECTING) {
+                if (id === ConnectionRequest.ID) {
+                    console.log("connection request");
 
-                this.clientId = dpk.clientId;
+                    dataPacket = new ConnectionRequest(packet.getBuffer());
+                    dataPacket.decode();
 
-                pk = new ConnectionRequestAccepted();
-                pk.address = this.getAddress();
-                pk.port = this.getPort();
-                pk.sendPingTime = dpk.sendPingTime;
-                pk.sendPongTime = this.sessionManager.getTimeSinceStart();
-                this.queueConnectedPacket(pk, PacketReliability.UNRELIABLE, 0, RakNet.PRIORITY_IMMEDIATE);
-                break;
+                    this.clientId = dataPacket.clientID;  //TODO
 
-            case NewIncomingConnection.ID:
-                this.sessionManager.getLogger().debug("Got NewIncomingConnection from "+this);
+                    pk = new ConnectionRequestAccepted();
+                    pk.address = this.getAddress();
+                    pk.port = this.getPort();
+                    pk.sendPingTime = dataPacket.sendPingTime;
+                    pk.sendPongTime = this.sessionManager.getTimeSinceStart();
+                    this.queueConnectedPacket(pk, PacketReliability.UNRELIABLE, 0, RakNet.PRIORITY_IMMEDIATE);
+                }else if(id === NewIncomingConnection.ID) {
+                    dataPacket = new NewIncomingConnection(packet.getBuffer());
+                    dataPacket.decode();
 
-                dpk = new NewIncomingConnection(packet.getBuffer());
-                dpk.decode();
+                    console.log("new conn");
 
-                if(dpk.port === this.sessionManager.getPort()){ //todo: if port checking
-                    this.setConnected();
+                    if (dataPacket.port === this.sessionManager.getPort() || true) {  //TODO
+                        this.state = Session.STATE_CONNECTED;
+                        console.log("connected");
 
-                    this.sessionManager.openSession(this);
-
-                    this.sendPing();
+                        this.sendPing();
+                    }
                 }
-                break;
-
-            case ConnectedPing.ID:
-                dpk = new ConnectedPing(packet.getBuffer());
-                dpk.decode();
+            }else if (id === DisconnectionNotification.ID) {
+                this.disconnect("client disconnected");
+            }else if (id === ConnectedPing.ID) {
+                dataPacket = new ConnectedPing(packet.getBuffer());
+                dataPacket.decode();
 
                 pk = new ConnectedPong();
-                pk.sendPingTime = dpk.sendPingTime;
+                pk.sendPingTime = dataPacket.sendPingTime;
                 pk.sendPongTime = this.sessionManager.getTimeSinceStart();
                 this.queueConnectedPacket(pk, PacketReliability.UNRELIABLE, 0);
-                break;
+            }else if (id === ConnectedPong.ID) {
+                dataPacket = new ConnectedPong(packet.getBuffer());
+                dataPacket.decode();
 
-            case ConnectedPong.ID:
-                dpk = new ConnectedPong(packet.getBuffer());
-                dpk.decode();
-
-                this.handlePong(dpk.sendPingTime, dpk.sendPongTime);
-                break;
-
-            case DisconnectionNotification.ID:
-                this.disconnect("client disconnect"); //supposed to send ack
-                break;
-
-            case MessageIdentifiers.MINECRAFT_HEADER:
+                this.handlePong(dataPacket.sendPingTime, dataPacket.sendPongTime);
+            }else if (this.state === Session.STATE_CONNECTED) {
                 this.packetBatches.add(packet);
-                this.sessionManager.getLogger().debug("Got a Minecraft packet");
-                break;
-
-            default:
-                this.packetBatches.add(packet);
-                this.sessionManager.getLogger().debug("Got unknown packet: ", id);
-                break;
+            }
         }
     }
 
