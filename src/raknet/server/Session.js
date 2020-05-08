@@ -307,7 +307,7 @@ class Session {
         let id = packet.getBuffer()[0];
         let dpk, pk;
         switch(id){
-            case ConnectionRequest.getId():
+            case ConnectionRequest.ID:
                 this.sessionManager.getLogger().debug("Got ConnectionRequest from "+this);
                 dpk = new ConnectionRequest(packet.getBuffer());
                 dpk.decode();
@@ -322,7 +322,7 @@ class Session {
                 this.queueConnectedPacket(pk, PacketReliability.UNRELIABLE, 0, RakNet.PRIORITY_IMMEDIATE);
                 break;
 
-            case NewIncomingConnection.getId():
+            case NewIncomingConnection.ID:
                 this.sessionManager.getLogger().debug("Got NewIncomingConnection from "+this);
 
                 dpk = new NewIncomingConnection(packet.getBuffer());
@@ -337,7 +337,7 @@ class Session {
                 }
                 break;
 
-            case ConnectedPing.getId():
+            case ConnectedPing.ID:
                 dpk = new ConnectedPing(packet.getBuffer());
                 dpk.decode();
 
@@ -347,14 +347,14 @@ class Session {
                 this.queueConnectedPacket(pk, PacketReliability.UNRELIABLE, 0);
                 break;
 
-            case ConnectedPong.getId():
+            case ConnectedPong.ID:
                 dpk = new ConnectedPong(packet.getBuffer());
                 dpk.decode();
 
                 this.handlePong(dpk.sendPingTime, dpk.sendPongTime);
                 break;
 
-            case DisconnectionNotification.getId():
+            case DisconnectionNotification.ID:
                 this.disconnect("client disconnect"); //supposed to send ack
                 break;
 
