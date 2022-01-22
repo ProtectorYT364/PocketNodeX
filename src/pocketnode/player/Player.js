@@ -912,7 +912,7 @@ class Player extends Human {
 
                     let pk = new ResourcePackDataInfoPacket();
                     pk.packId = pack.getPackId();
-                    pk.maxChunkSize = 1048576;
+                    pk.maxChunkSize = 128 * 1024;
                     pk.chunkCount = Math.ceil(pack.getPackSize() / pk.maxChunkSize);
                     pk.compressedPackSize = pack.getPackSize();
                     pk.sha256 = pack.getSha256();
