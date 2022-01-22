@@ -1,21 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fae901bb-40a3-4b37-a599-b130e892034e" name="Default Changelist" comment="fix">
-      <change afterPath="$PROJECT_DIR$/src/pocketnode/network/mcpe/protocol/PlayerArmorDamagePacket.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pocketnode/network/mcpe/protocol/PlayerEnchantOptionsPacket.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pocketnode/network/mcpe/protocol/PositionTrackingDBClientRequestPacket.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pocketnode/network/mcpe/protocol/PositionTrackingDBServerBroadcastPacket.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pocketnode/network/mcpe/protocol/types/Enchant.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pocketnode/network/mcpe/protocol/types/EnchantOption.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pocketnode/nbt/NBT.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pocketnode/nbt/NBT.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pocketnode/nbt/NBTTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pocketnode/nbt/NBTTest.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pocketnode/network/PlayerNetworkSessionAdapter.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pocketnode/network/PlayerNetworkSessionAdapter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pocketnode/network/mcpe/protocol/PacketPool.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pocketnode/network/mcpe/protocol/PacketPool.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pocketnode/network/mcpe/protocol/ProtocolInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pocketnode/network/mcpe/protocol/ProtocolInfo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pocketnode/network/mcpe/protocol/StartGamePacket.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pocketnode/network/mcpe/protocol/StartGamePacket.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pocketnode/player/Player.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pocketnode/player/Player.js" afterDir="false" />
+    <list default="true" id="fae901bb-40a3-4b37-a599-b130e892034e" name="Default Changelist" comment="add missing packets">
+      <change afterPath="$PROJECT_DIR$/src/pocketnode/network/mcpe/protocol/types/SpawnSettings.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,7 +163,7 @@
       <workItem from="1575403420362" duration="10675000" />
       <workItem from="1575452514463" duration="8970000" />
       <workItem from="1642835941487" duration="6350000" />
-      <workItem from="1642848127442" duration="4971000" />
+      <workItem from="1642848127442" duration="5393000" />
     </task>
     <task id="LOCAL-00001" summary="some fix">
       <created>1642838395088</created>
@@ -241,7 +228,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642848593419</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="add missing packets">
+      <created>1642853213650</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1642853213650</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -267,6 +261,7 @@
     <MESSAGE value="small change" />
     <MESSAGE value="1.16.0 thing" />
     <MESSAGE value="fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix" />
+    <MESSAGE value="add missing packets" />
+    <option name="LAST_COMMIT_MESSAGE" value="add missing packets" />
   </component>
 </project>

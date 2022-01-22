@@ -4,11 +4,14 @@ const ProtocolInfo = require("./ProtocolInfo");
 const fs = require('fs');
 const ServerName = require("../../../../raknet/server/ServerName");
 const Base64 = require("../../../utils/Base64");
+const SpawnSettings = require("./types/SpawnSettings");
 
 "use strict";
 
 class StartGamePacket extends DataPacket {
     static NETWORK_ID = ProtocolInfo.START_GAME_PACKET;
+
+    spawnSettings = new SpawnSettings(0, "", 0);
 
     _encodePayload() {
         // int64 = varLong
@@ -29,9 +32,7 @@ class StartGamePacket extends DataPacket {
 
         this.writeVarInt(0);
 
-        this.writeLShort(0); // type default
-        this.writeString(""); // biome name
-        this.writeVarInt(0); // dimension
+        this.spawnSettings.write(this);
         this.writeVarInt(2); // generator
         this.writeVarInt(0);
         this.writeVarInt(1); // difficulty
