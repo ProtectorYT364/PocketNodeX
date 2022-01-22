@@ -15,19 +15,19 @@ class BatchPacket extends DataPacket {
     allowBatching = false;
     allowBeforeLogin = true;
 
-    _decodeHeader() {
-        let pid = this.readByte();
-        if (pid !== this.getId()) {
-            throw new Error("Received " + pid + " as the id, expected " + this.getId());
-        }
-    }
-
     _decodePayload() {
         let data = this.readRemaining();
         try {
             this.payload = new BinaryStream(Zlib.inflateRawSync(data, {level: this._compressionLevel, maxOutputLength: 1024 * 1024 * 2}));
         }catch (e) {
             this.payload = new BinaryStream();
+        }
+    }
+
+    _decodeHeader() {
+        let pid = this.readByte();
+        if (pid !== this.getId()) {
+            throw new Error("Received " + pid + " as the id, expected " + this.getId());
         }
     }
 
