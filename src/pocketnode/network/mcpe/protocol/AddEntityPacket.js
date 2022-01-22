@@ -31,8 +31,8 @@ class AddEntityPacket extends DataPacket {
         this.writeUnsignedVarInt(this.uvarint1d);
     }
 
-    handle(session) {
-        return session.handleAddEntity(this);
+    handle(handler) {
+        return handler.handleAddEntity(this);
     }
 }
 

@@ -30,8 +30,8 @@ class BlockEventPacket extends DataPacket {
         this.writeVarInt(this.eventData);
     }
 
-    handle(session) {
-        return session.handleBlockEvent(this);
+    handle(handler) {
+        return handler.handleBlockEvent(this);
     }
 }
 

@@ -30,8 +30,8 @@ class MobArmorEquipmentPacket extends DataPacket {
         this.writeSlot(this.feet);
     }
 
-    handle(session) {
-        return session.handleMobArmorEquipment(this);
+    handle(handler) {
+        return handler.handleMobArmorEquipment(this);
     }
 }
 

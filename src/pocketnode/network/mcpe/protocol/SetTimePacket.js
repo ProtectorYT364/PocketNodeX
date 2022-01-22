@@ -17,8 +17,8 @@ class SetTimePacket extends DataPacket {
         this.writeVarInt(this.time);
     }
 
-    handle(session) {
-        return session.handleSetTime(this);
+    handle(handler) {
+        return handler.handleSetTime(this);
     }
 }
 

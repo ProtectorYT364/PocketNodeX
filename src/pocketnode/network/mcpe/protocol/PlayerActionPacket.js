@@ -132,8 +132,8 @@ class PlayerActionPacket extends DataPacket {
         this.writeVarInt(this.face);
     }
 
-    handle(session) {
-        return session.handlePlayerAction(this);
+    handle(handler) {
+        return handler.handlePlayerAction(this);
     }
 }
 

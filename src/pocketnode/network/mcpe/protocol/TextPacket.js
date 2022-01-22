@@ -123,8 +123,8 @@ class TextPacket extends DataPacket {
         this.writeString(this.platformChatId);
     }
 
-    handle(session) {
-        return session.handleText(this);
+    handle(handler) {
+        return handler.handleText(this);
     }
 }
 

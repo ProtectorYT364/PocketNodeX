@@ -30,8 +30,8 @@ class PlayerInputPacket extends DataPacket {
         this.writeBool(this.isSneaking);
     }
 
-    handle(session) {
-        return session.handlePlayerInput(this);
+    handle(handler) {
+        return handler.handlePlayerInput(this);
     }
 }
 

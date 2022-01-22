@@ -56,8 +56,8 @@ class ResourcePackClientResponsePacket extends DataPacket {
         });
     }
 
-    handle(session) {
-        return session.handleResourcePackClientResponse(this);
+    handle(handler) {
+        return handler.handleResourcePackClientResponse(this);
     }
 }
 

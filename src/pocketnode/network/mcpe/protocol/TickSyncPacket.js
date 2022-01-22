@@ -21,8 +21,8 @@ class TickSyncPacket extends DataPacket {
         this.writeLLong(this.serverReceiveTime);
     }
 
-    handle(session) {
-        return session.handleTickSync(this);
+    handle(handler) {
+        return handler.handleTickSync(this);
     }
 }
 

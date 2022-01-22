@@ -17,8 +17,8 @@ class SetDefaultGameTypePacket extends DataPacket {
         this.writeUnsignedVarInt(this.gamemode);
     }
 
-    handle(session) {
-        return session.handleSetDefaultGameType(this);
+    handle(handler) {
+        return handler.handleSetDefaultGameType(this);
     }
 }
 

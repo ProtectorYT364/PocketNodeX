@@ -33,8 +33,8 @@ class CodeBuilderPacket extends DataPacket {
         this.writeBool(this.openCodeBuilder);
     }
 
-    handle(session) {
-        return session.handleCodeBuilder(this);
+    handle(handler) {
+        return handler.handleCodeBuilder(this);
     }
 }
 

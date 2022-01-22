@@ -268,8 +268,8 @@ class LevelEventPacket extends DataPacket {
         this.writeVarInt(this.data);
     }
 
-    handle(session) {
-        session.handleLevelEvent(this);
+    handle(handler) {
+        handler.handleLevelEvent(this);
     }
 }
 

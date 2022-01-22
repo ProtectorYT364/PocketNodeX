@@ -22,8 +22,8 @@ class UpdateAttributesPacket extends DataPacket {
         this.writeAttributeList(this.entries);
     }
 
-    handle(session) {
-        return session.handleUpdateAttributes(this);
+    handle(handler) {
+        return handler.handleUpdateAttributes(this);
     }
 }
 

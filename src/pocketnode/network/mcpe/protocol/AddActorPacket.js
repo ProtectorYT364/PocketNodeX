@@ -206,8 +206,8 @@ class AddActorPacket extends DataPacket {
         });
     }
 
-    handle(session) {
-        return session.handleAddEntity(this);
+    handle(handler) {
+        return handler.handleAddEntity(this);
     }
 }
 module.exports = AddActorPacket;

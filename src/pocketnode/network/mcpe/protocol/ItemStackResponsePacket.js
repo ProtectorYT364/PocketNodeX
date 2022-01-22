@@ -1,6 +1,7 @@
 const DataPacket = require("./DataPacket");
 const ProtocolInfo = require("./ProtocolInfo");
 const collect = require("collect.js");
+const ItemStackResponse = require("./types/Enchant");
 
 class ItemStackResponsePacket extends DataPacket {
     static NETWORK_ID = ProtocolInfo.ITEM_STACK_RESPONSE_PACKET;
@@ -30,8 +31,8 @@ class ItemStackResponsePacket extends DataPacket {
         });
     }
 
-    handle(session) {
-        return session.handleItemStackResponse(this);
+    handle(handler) {
+        return handler.handleItemStackResponse(this);
     }
 }
 

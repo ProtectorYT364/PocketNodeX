@@ -32,8 +32,8 @@ class MobEquipmentPacket extends DataPacket {
         this.writeByte(this.windowId);
     }
 
-    handle(session) {
-        return session.handleMobEquipment(this);
+    handle(handler) {
+        return handler.handleMobEquipment(this);
     }
 
 }

@@ -21,7 +21,7 @@ class BiomeDefinitionListPacket extends DataPacket {
         this.append(this.namedtag === null || Buffer.from(BiomeDefinitionListPacket.HARDCODED_NBT_BLOB(), 'base64'));
     }
 
-    handle(session) {
+    handle(handler) {
         return false;
     }
 }

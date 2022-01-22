@@ -31,7 +31,7 @@ class UpdateSoftEnumPacket extends DataPacket {
         this.writeByte(this.type);
     }
 
-    handle(session) {
+    handle(handler) {
         return false;
     }
 }

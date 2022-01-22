@@ -17,8 +17,8 @@ class SetLocalPlayerAsInitializedPacket extends DataPacket {
         this.writeEntityRuntimeId(this.entityRuntimeId);
     }
 
-    handle(session) {
-        return session.handleSetLocalPlayerAsInitialized(this);
+    handle(handler) {
+        return handler.handleSetLocalPlayerAsInitialized(this);
     }
 }
 

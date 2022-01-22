@@ -99,8 +99,8 @@ class MovePlayerPacket extends DataPacket {
         }
     }
 
-    handle(session) {
-        return session.handleMovePlayer(this);
+    handle(handler) {
+        return handler.handleMovePlayer(this);
     }
 
 }

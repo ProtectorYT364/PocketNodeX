@@ -53,8 +53,8 @@ class InteractPacket extends DataPacket {
         }
     }
 
-    handle(session) {
-        return session.handleInteract(this);
+    handle(handler) {
+        return handler.handleInteract(this);
     }
 }
 

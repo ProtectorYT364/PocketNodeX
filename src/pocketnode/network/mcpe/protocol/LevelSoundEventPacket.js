@@ -1138,8 +1138,8 @@ class LevelSoundEventPacket extends DataPacket {
         this.writeBool(this.disableRelativeVolume);
     }
 
-    handle(session) {
-        return session.handleLevelSoundEvent(this);
+    handle(handler) {
+        return handler.handleLevelSoundEvent(this);
     }
 }
 

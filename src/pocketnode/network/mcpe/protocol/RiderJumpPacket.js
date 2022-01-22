@@ -17,8 +17,8 @@ class RiderJumpPacket extends DataPacket {
         this.writeVarInt(this.jumpStrenght);
     }
 
-    handle(session) {
-        return session.handleRiderJump(this);
+    handle(handler) {
+        return handler.handleRiderJump(this);
     }
 }
 

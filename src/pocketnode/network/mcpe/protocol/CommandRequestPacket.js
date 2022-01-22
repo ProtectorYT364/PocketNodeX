@@ -25,8 +25,8 @@ class CommandRequestPacket extends DataPacket {
         this.writeBool(this.isInternal);
     }
 
-    handle(session) {
-        return session.handleCommandRequest(this);
+    handle(handler) {
+        return handler.handleCommandRequest(this);
     }
 }
 

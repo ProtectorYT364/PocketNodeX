@@ -17,8 +17,8 @@ class AutomationClientConnectPacket extends DataPacket {
         this.writeString(this.serverUri);
     }
 
-    handle(session) {
-        return session.handleAutomationClientConnect(this);
+    handle(handler) {
+        return handler.handleAutomationClientConnect(this);
     }
 }
 

@@ -32,8 +32,8 @@ class PlayerEnchantOptionsPacket extends DataPacket {
         });
     }
 
-    handle(session) {
-        return session.handlePlayerEnchantOptions(this);
+    handle(handler) {
+        return handler.handlePlayerEnchantOptions(this);
     }
 }
 

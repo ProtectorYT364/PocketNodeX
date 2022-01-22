@@ -47,8 +47,8 @@ class PlayStatusPacket extends DataPacket {
         this.writeInt(this.status);
     }
 
-    handle(session) {
-        return session.handlePlayStatus(this);
+    handle(handler) {
+        return handler.handlePlayStatus(this);
     }
 }
 

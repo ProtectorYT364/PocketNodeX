@@ -25,8 +25,8 @@ class ActorFallPacket extends DataPacket {
         this.writeBool(this.isInVoid);
     }
 
-    handle(session) {
-        return session.handleActorFall(this);
+    handle(handler) {
+        return handler.handleActorFall(this);
     }
 }
 

@@ -149,8 +149,8 @@ class AdventureSettingsPacket extends DataPacket {
         }
     }
 
-    handle(session) {
-        return session.handleAdventureSettings(this);
+    handle(handler) {
+        return handler.handleAdventureSettings(this);
     }
 
 }

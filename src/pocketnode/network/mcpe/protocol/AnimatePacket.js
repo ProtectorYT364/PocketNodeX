@@ -41,8 +41,8 @@ class AnimatePacket extends DataPacket {
         }
     }
 
-    handle(session) {
-        return session.handleAnimate(this);
+    handle(handler) {
+        return handler.handleAnimate(this);
     }
 }
 

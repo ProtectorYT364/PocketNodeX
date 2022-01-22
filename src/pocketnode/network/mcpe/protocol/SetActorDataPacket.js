@@ -21,8 +21,8 @@ class SetActorDataPacket extends DataPacket {
         this.writeEntityMetadata(this.metadata);
     }
 
-    handle(session) {
-        return session.handleSetEntityData(this);
+    handle(handler) {
+        return handler.handleSetEntityData(this);
     }
 }
 

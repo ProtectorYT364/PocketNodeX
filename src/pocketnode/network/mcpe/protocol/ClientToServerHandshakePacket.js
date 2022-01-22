@@ -16,8 +16,8 @@ class ClientToServerHandshakePacket extends DataPacket {
         // no payload
     }
 
-    handle(session) {
-        return session.handleClientToServerHandshake(this);
+    handle(handler) {
+        return handler.handleClientToServerHandshake(this);
     }
 }
 

@@ -27,8 +27,8 @@ class PositionTrackingDBClientRequestPacket extends DataPacket {
         this.writeVarInt(this.trackingId);
     }
 
-    handle(session) {
-        return session.handlePositionTrackingDBClientRequest(this);
+    handle(handler) {
+        return handler.handlePositionTrackingDBClientRequest(this);
     }
 }
 

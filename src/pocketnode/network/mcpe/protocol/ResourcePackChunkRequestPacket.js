@@ -21,8 +21,8 @@ class ResourcePackChunkRequestPacket extends DataPacket {
         this.writeLInt(this.chunkIndex);
     }
 
-    handle(session) {
-        return session.handleResourcePackChunkRequest(this);
+    handle(handler) {
+        return handler.handleResourcePackChunkRequest(this);
     }
 }
 

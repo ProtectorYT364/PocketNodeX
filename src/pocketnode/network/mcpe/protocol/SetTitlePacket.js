@@ -57,8 +57,8 @@ class SetTitlePacket extends DataPacket {
         this.writeVarInt(this.fadeOutTime);
     }
 
-    handle(session) {
-        return session.handleSetTitle(this);
+    handle(handler) {
+        return handler.handleSetTitle(this);
     }
 }
 

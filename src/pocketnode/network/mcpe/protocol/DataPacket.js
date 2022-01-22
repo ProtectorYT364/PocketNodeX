@@ -67,7 +67,7 @@ class DataPacket extends BinaryStream {
         return this.buffer;
     }
 
-    handle(_session) {
+    handle(handler) {
         return false;
     }
 }

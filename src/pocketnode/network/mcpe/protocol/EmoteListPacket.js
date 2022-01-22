@@ -38,8 +38,8 @@ class EmoteListPacket extends DataPacket {
         });
     }
 
-    handle(session) {
-        return session.handleEmoteList(this);
+    handle(handler) {
+        return handler.handleEmoteList(this);
     }
 }
 

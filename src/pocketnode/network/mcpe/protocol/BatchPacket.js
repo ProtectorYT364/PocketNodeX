@@ -62,13 +62,13 @@ class BatchPacket extends DataPacket {
         return pks;
     }
 
-    handle(session, logger) {
+    handle(handler, logger) {
         if (this.payload.length === 0) {
             return false;
         }
 
         this.getPackets().forEach(buf => {
-            let pk = session.raknetAdapter.packetPool.getPacket(buf[0]);
+            let pk = handler.raknetAdapter.packetPool.getPacket(buf[0]);
 
             if (pk instanceof DataPacket) {
                 if (!pk.allowBatching) {
@@ -76,7 +76,7 @@ class BatchPacket extends DataPacket {
                 }
 
                 pk.setBuffer(buf, 1);
-                session.handleDataPacket(pk);
+                handler.handleDataPacket(pk);
             } else {
                 logger.debug("Got unhandled packet: 0x" + buf.slice(0, 1).toString("hex"));
             }

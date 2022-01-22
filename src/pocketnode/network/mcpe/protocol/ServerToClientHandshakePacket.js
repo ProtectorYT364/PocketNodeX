@@ -19,8 +19,8 @@ class ServerToClientHandshakePacket extends DataPacket {
         this.writeString(this.jwt);
     }
 
-    handle(session) {
-        return session.handleServerToClientHandshake(this);
+    handle(handler) {
+        return handler.handleServerToClientHandshake(this);
     }
 }
 

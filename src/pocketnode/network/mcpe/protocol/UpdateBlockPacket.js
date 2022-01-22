@@ -70,8 +70,8 @@ class UpdateBlockPacket extends DataPacket {
         this.writeUnsignedVarInt(this.dataLayerId);
     }
 
-    handle(session) {
-        return session.handleUpdateBlock(this);
+    handle(handler) {
+        return handler.handleUpdateBlock(this);
     }
 
 }

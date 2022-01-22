@@ -145,8 +145,8 @@ class InventoryTransactionPacket extends DataPacket {
         }
     }
 
-    handle(session) {
-        return session.handleInventoryTransaction(this);
+    handle(handler) {
+        return handler.handleInventoryTransaction(this);
     }
 }
 

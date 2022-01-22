@@ -49,8 +49,8 @@ class MobEffectPacket extends DataPacket {
         this.writeVarInt(this.duration);
     }
 
-    handle(session) {
-        return session.handleMobEffect(this);
+    handle(handler) {
+        return handler.handleMobEffect(this);
     }
 }
 

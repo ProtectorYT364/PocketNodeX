@@ -17,8 +17,8 @@ class AddBehaviorTreePacket extends DataPacket {
         this.writeString(this.behaviorTreeJson);
     }
 
-    handle(session) {
-        return session.handleAddBehaviorTree(this);
+    handle(handler) {
+        return handler.handleAddBehaviorTree(this);
     }
 }
 

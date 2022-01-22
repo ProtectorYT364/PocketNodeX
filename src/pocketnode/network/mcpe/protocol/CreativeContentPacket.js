@@ -31,8 +31,8 @@ class CreativeContentPacket extends DataPacket {
         });
     }
 
-    handle(session) {
-        return session.handleCreativeContent(this);
+    handle(handler) {
+        return handler.handleCreativeContent(this);
     }
 }
 

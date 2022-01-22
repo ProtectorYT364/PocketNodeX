@@ -27,8 +27,8 @@ class PlayerSkinPacket extends DataPacket {
         this.writeBool(this.skin.isVerified());
     }
 
-    handle(session) {
-        return session.handlePlayerSkin(this);
+    handle(handler) {
+        return handler.handlePlayerSkin(this);
     }
 }
 

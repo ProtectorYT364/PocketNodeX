@@ -14,8 +14,8 @@ class StructureBlockUpdatePacket extends DataPacket {
         //TODO
     }
 
-    handle(session) {
-        return session.handleStructureBlockUpdate(this);
+    handle(handler) {
+        return handler.handleStructureBlockUpdate(this);
     }
 }
 

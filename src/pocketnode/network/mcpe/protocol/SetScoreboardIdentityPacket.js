@@ -46,7 +46,7 @@ class SetScoreboardIdentityPacket extends DataPacket {
         }
     }
 
-    handle(session) {
+    handle(handler) {
         return false;
     }
 }

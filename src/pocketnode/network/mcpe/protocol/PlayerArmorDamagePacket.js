@@ -92,8 +92,8 @@ class PlayerArmorDamagePacket extends DataPacket {
         this.maybeWriteDamage(this.feetSlotDamage);
     }
 
-    handle(session) {
-        return session.handlePlayerArmorDamage(this);
+    handle(handler) {
+        return handler.handlePlayerArmorDamage(this);
     }
 }
 

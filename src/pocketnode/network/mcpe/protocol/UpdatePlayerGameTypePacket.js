@@ -29,8 +29,8 @@ class UpdatePlayerGameTypePacket extends DataPacket {
         this.writeEntityUniqueId(this.playerEntityUniqueId);
     }
 
-    handle(session) {
-        return session.handleUpdatePlayerGameType(this);
+    handle(handler) {
+        return handler.handleUpdatePlayerGameType(this);
     }
 }
 

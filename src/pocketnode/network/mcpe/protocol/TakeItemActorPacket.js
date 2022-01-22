@@ -21,8 +21,8 @@ class TakeItemActorPacket extends DataPacket {
         this.writeEntityRuntimeId(this.eid);
     }
 
-    handle(session) {
-        return session.handleTakeItemActor(this);
+    handle(handler) {
+        return handler.handleTakeItemActor(this);
     }
 }
 

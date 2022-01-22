@@ -27,8 +27,8 @@ class DisconnectPacket extends DataPacket {
         }
     }
 
-    handle(session) {
-        return session.handleDisconnect(this);
+    handle(handler) {
+        return handler.handleDisconnect(this);
     }
 }
 

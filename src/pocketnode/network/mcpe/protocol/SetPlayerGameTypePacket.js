@@ -17,8 +17,8 @@ class SetPlayerGameTypePacket extends DataPacket {
         this.writeVarInt(this.gamemode);
     }
 
-    handle(session) {
-        return session.handleSetPlayerGameType(this);
+    handle(handler) {
+        return handler.handleSetPlayerGameType(this);
     }
 
 }

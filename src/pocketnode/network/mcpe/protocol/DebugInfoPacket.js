@@ -29,8 +29,8 @@ class DebugInfoPacket extends DataPacket{
         this.writeString(this.data);
     }
 
-    handle(session) {
-        return session.handleDebugInfo(this);
+    handle(handler) {
+        return handler.handleDebugInfo(this);
     }
 }
 

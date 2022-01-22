@@ -17,8 +17,8 @@ class RemoveActorPacket extends DataPacket {
         this.writeEntityUniqueId(this.entityUniqueId);
     }
 
-    handle(session) {
-        return session.handleRemoveActor(this);
+    handle(handler) {
+        return handler.handleRemoveActor(this);
     }
 }
 

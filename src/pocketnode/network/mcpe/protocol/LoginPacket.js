@@ -84,8 +84,8 @@ class LoginPacket extends DataPacket {
         this.locale = this.clientData["LanguageCode"] || null;
     }
 
-    handle(session) {
-        return session.handleLogin(this);
+    handle(handler) {
+        return handler.handleLogin(this);
     }
 }
 

@@ -67,8 +67,8 @@ class CommandOutputPacket extends DataPacket {
         });
     }
 
-    handle(session) {
-        return session.handleCommandOutput(this);
+    handle(handler) {
+        return handler.handleCommandOutput(this);
     }
 }
 

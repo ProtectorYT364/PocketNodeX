@@ -360,8 +360,8 @@ class AvailableCommandsPacket extends DataPacket {
         });
     }
 
-    handle(session) {
-        return session.handleAvailableCommands(this);
+    handle(handler) {
+        return handler.handleAvailableCommands(this);
     }
 }
 

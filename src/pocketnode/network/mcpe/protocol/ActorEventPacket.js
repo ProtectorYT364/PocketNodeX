@@ -207,8 +207,8 @@ class ActorEventPacket extends DataPacket {
         this.writeVarInt(this.data);
     }
 
-    handle(session) {
-        return session.handleActorEvent(this);
+    handle(handler) {
+        return handler.handleActorEvent(this);
     }
 }
 

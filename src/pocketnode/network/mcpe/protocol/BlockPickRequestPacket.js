@@ -30,8 +30,8 @@ class BlockPickRequestPacket extends DataPacket {
         this.writeByte(this.hotbarSlot);
     }
 
-    handle(session) {
-        return session.handleBlockPickRequest(this);
+    handle(handler) {
+        return handler.handleBlockPickRequest(this);
     }
 }
 

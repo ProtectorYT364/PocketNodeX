@@ -21,7 +21,7 @@ class NetworkStackLatencyPacket extends DataPacket {
         this.writeBool(this.needResponse);
     }
 
-    handle(session) {
+    handle(handler) {
         return true;
     }
 }

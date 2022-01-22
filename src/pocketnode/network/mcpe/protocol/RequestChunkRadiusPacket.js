@@ -17,8 +17,8 @@ class RequestChunkRadiusPacket extends DataPacket {
         this.writeVarInt(this.radius);
     }
 
-    handle(session) {
-        return session.handleRequestChunkRadius(this);
+    handle(handler) {
+        return handler.handleRequestChunkRadius(this);
     }
 }
 

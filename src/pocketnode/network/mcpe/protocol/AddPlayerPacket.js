@@ -119,8 +119,8 @@ class AddPlayerPacket extends DataPacket {
         this.writeString(this.deviceId);
     }
 
-    handle(session) {
-        return session.handleAddPlayer(this);
+    handle(handler) {
+        return handler.handleAddPlayer(this);
     }
 }
 

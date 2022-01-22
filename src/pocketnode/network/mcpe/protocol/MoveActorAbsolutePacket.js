@@ -48,8 +48,8 @@ class MoveActorAbsolutePacket extends DataPacket {
         this.writeByteRotation(this.zRot);
     }
 
-    handle(session) {
-        return session.handleMoveActorAbsolute(this);
+    handle(handler) {
+        return handler.handleMoveActorAbsolute(this);
     }
 }
 

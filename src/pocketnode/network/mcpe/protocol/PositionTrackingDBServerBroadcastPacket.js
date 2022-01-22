@@ -51,8 +51,8 @@ class PositionTrackingDBServerBroadcastPacket extends DataPacket {
         this.append(this.nbt);
     }
 
-    handle(session) {
-        return session.handlePositionTrackingDBServerBroadcast(this);
+    handle(handler) {
+        return handler.handlePositionTrackingDBServerBroadcast(this);
     }
 }
 

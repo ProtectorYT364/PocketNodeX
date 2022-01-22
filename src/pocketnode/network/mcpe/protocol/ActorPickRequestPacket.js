@@ -21,8 +21,8 @@ class ActorPickRequestPacket extends DataPacket {
         this.writeByte(this.hotbarSlot);
     }
 
-    handle(session) {
-        return session.handleActorPickRequest(this);
+    handle(handler) {
+        return handler.handleActorPickRequest(this);
     }
 }
 

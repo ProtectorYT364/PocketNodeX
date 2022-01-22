@@ -17,8 +17,8 @@ class SubClientLoginPacket extends DataPacket {
         this.writeString(this.connectionRequestData);
     }
 
-    handle(session) {
-        return session.handleSubClientLogin(this);
+    handle(handler) {
+        return handler.handleSubClientLogin(this);
     }
 }
 

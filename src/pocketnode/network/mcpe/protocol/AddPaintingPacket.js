@@ -35,8 +35,8 @@ class AddPaintingPacket extends DataPacket {
         this.writeString(this.title);
     }
 
-    handle(session) {
-        return session.handleAddPainting(this);
+    handle(handler) {
+        return handler.handleAddPainting(this);
     }
 }
 

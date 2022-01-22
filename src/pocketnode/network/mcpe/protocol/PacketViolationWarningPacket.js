@@ -59,8 +59,8 @@ class PacketViolationWarningPacket extends DataPacket {
         this.writeString(this.message);
     }
 
-    handle(session) {
-        return session.handlePacketViolationWarning(this);
+    handle(handler) {
+        return handler.handlePacketViolationWarning(this);
     }
 }
 

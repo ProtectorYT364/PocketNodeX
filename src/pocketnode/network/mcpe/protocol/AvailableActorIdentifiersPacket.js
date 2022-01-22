@@ -21,7 +21,7 @@ class AvailableActorIdentifiersPacket extends DataPacket {
         this.append(this.namedtag || Buffer.from(AvailableActorIdentifiersPacket.HARDCODED_NBT_BLOB(), 'base64'));
     }
 
-    handle(session) {
+    handle(handler) {
         return false;
     }
 }
