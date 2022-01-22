@@ -3,7 +3,6 @@ const CommandSender = require("./CommandSender");
 const InvalidParameterError = require("../error/InvalidParameterError");
 
 const Player = require("../player/Player");
-const ConsoleCommandSender = require("./ConsoleCommandSender");
 
 class CommandMap {
 
@@ -115,50 +114,42 @@ class CommandMap {
     }
 
     dispatchCommand(sender, commandLine) {
-        if (commandLine === "") return;
-        let commandParts = commandLine.split(" ");
-        let cmd = commandParts.shift();
-        let args = commandParts;
+        if(commandLine === "") return;
+        commandLine = commandLine.split(" ");
+        let cmd = commandLine.shift();
+        let args = commandLine;
 
-        if (this.commands.has(cmd)) {
-            let command = this.commands.get(cmd);
-            if (command.getArguments().filter(arg => arg.isRequired()).length > 0) {
-                if (args.length > 0) {
-                    if (sender instanceof CommandSender || sender instanceof Player || sender instanceof ConsoleCommandSender) {
-                        command.execute(sender, args);
-                    } else {
-                        throw new InvalidParameterError("Sender was not of type CommandSender/Player/ConsoleCommandSender.");
-                    }
-                } else {
+        if(this.commands.has(cmd)){
+             let command = this.commands.get(cmd);
+             if(command.getArguments().filter(arg => arg.isRequired()).length > 0){
+                 if(args.length > 0){
+                     if(sender instanceof CommandSender || sender instanceof Player){
+                         command.execute(sender, args);
+                     }
+                 }else{
                     sender.sendMessage(command.getUsage());
-                }
-            } else {
-                if (sender instanceof CommandSender || sender instanceof Player || sender instanceof ConsoleCommandSender) {
-                    command.execute(sender, args);
-                } else {
-                    throw new InvalidParameterError("Sender was not of type CommandSender/Player/ConsoleCommandSender.");
-                }
-            }
-        } else if (this.aliases.has(cmd)) {
+                 }
+             }else{
+                 if(sender instanceof CommandSender || sender instanceof Player){
+                     command.execute(sender, args);
+                 }
+             }
+        }else if(this.aliases.has(cmd)){
             let command = this.aliases.get(cmd);
-            if (command.getArguments().filter(arg => arg.isRequired()).length > 0) {
-                if (args.length > 0) {
-                    if (sender instanceof CommandSender || sender instanceof Player || sender instanceof ConsoleCommandSender) {
-                        command.execute({sender: sender, args: args});
-                    } else {
-                        throw new InvalidParameterError("Sender was not of type CommandSender/Player/ConsoleCommandSender.");
+            if(command.getArguments().filter(arg => arg.isRequired()).length > 0){
+                if(args.length > 0){
+                    if(sender instanceof CommandSender){
+                        command.execute(sender, args);
                     }
-                } else {
+                }else{
                     sender.sendMessage(command.getUsage());
                 }
-            } else {
-                if (sender instanceof CommandSender || sender instanceof Player || sender instanceof ConsoleCommandSender) {
-                    command.execute({sender: sender, args: args});
-                } else {
-                    throw new InvalidParameterError("Sender was not of type CommandSender/Player/ConsoleCommandSender.");
+            }else{
+                if(sender instanceof CommandSender || sender instanceof Player){
+                    command.execute(sender, args);
                 }
             }
-        } else {
+        }else{
             sender.sendMessage("§4Command Not Found. Try /help for a list of commands.");
         }
     }
