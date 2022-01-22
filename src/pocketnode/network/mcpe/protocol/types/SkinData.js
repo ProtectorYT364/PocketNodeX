@@ -57,7 +57,7 @@ class SkinData {
      * @param pieceTintColors
      * @param isVerified
      */
-    constructor(skinId, resourcePatch, skinImage, animations = [], capeImage = null, geometryData = '', animationData = '', premium = false, persona = false, personaCapeOnClassic = false, capeId = '', armSize = SkinData.ARM_SIZE_WIDE, skinColor = "", personaPieces = [], pieceTintColors = [], isVerified = false) {
+    constructor(skinId, resourcePatch, skinImage, animations = [], capeImage = null, geometryData = '', animationData = '', premium = false, persona = false, personaCapeOnClassic = false, capeId = '', armSize = SkinData.ARM_SIZE_WIDE, skinColor = "", personaPieces = [], pieceTintColors = [], isVerified = true) {
         this._skinId = skinId;
         this._resourcePatch = resourcePatch;
         this._skinImage = skinImage;
