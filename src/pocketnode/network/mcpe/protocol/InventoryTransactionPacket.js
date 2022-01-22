@@ -123,6 +123,8 @@ class InventoryTransactionPacket extends DataPacket {
 
         this.writeUnsignedVarInt(this.transactionType);
 
+	this->putBool(this.hasItemStackIds);
+
         this.writeUnsignedVarInt(this.actions.length);
         this.actions.forEach(action => {
             action.write(this, this.hasItemStackIds);
