@@ -45,11 +45,9 @@ class StartGamePacket extends DataPacket {
         this.writeVarInt(0); // day cycle / time
         this.writeVarInt(0); // edu edition offer
         this.writeByte(0); // edu features
-
-        this.writeLFloat(0); // rain lvl
         this.writeString(""); // eduProductUUID
+        this.writeLFloat(0); // rain lvl
         this.writeLFloat(0); // lightning lvl
-
         this.writeByte(0); // confirmed platform locked
         this.writeByte(1); // multi player game
         this.writeByte(1); // broadcast to lan
@@ -80,7 +78,7 @@ class StartGamePacket extends DataPacket {
         this.writeLInt(0); // limitedWorldWidth
         this.writeLInt(0); // limitedWorldLength
         this.writeBool(false); // isNewNether
-        this.writeBool(null); // experimentalGameplayOverride
+        this.writeBool(false); // experimentalGameplayOverride
 
         this.writeString(''); // random level uuid
         this.writeString("world"); // world name
