@@ -558,12 +558,8 @@ class Player extends Human {
     kick(reason = "", isAdmin = true) {
         let message;
         if (isAdmin) {
-            if (true) {//todo: not is banned
-                message = "Kicked by admin." + (reason !== "" ? " Reason: " + reason : "");
-            } else {
-                message = reason;
-            }
-        } else {
+            message = "Kicked by admin." + (reason !== "" ? " Reason: " + reason : "");
+	} else {
             if (reason === "") {
                 message = "Unknown Reason.";
             } else {
@@ -1022,7 +1018,8 @@ class Player extends Human {
             new Attribute(12, "minecraft:luck", -1024.0, 1024.0, 0.0, true),
             new Attribute(13, "minecraft:fall_damage", 0.0, 340282346638528859811704183484516925440.0, 1.0, true),
             new Attribute(14, "minecraft:horse.jump_strength", 0.0, 2.0, 0.7, true),
-            new Attribute(15, "minecraft:zombie.spawn_reinforcements", 0.0, 1.0, 0.0)
+            new Attribute(15, "minecraft:zombie.spawn_reinforcements", 0.0, 1.0, 0.0),
+	    new Attribute(16, "minecraft:lava_movement", 0.0, 340282346638528859811704183484516925440.0, 0.02, true)
         ];
         this.dataPacket(pk);
 
