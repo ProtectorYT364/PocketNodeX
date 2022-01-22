@@ -26,7 +26,7 @@ class StartGamePacket extends DataPacket {
         this.writeLFloat(0);
 
         this.writeVarInt(0);
-        this.writeVarInt();
+
         this.writeLShort(0);
         this.writeString("");
         this.writeVarInt(0);// dimension
