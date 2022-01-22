@@ -65,9 +65,6 @@ class Server {
         this.getLogger().info(localizationManager.getPhrase("starting-pocketnode").replace("{{name}}", this.getName()).replace("{{version}}", this.getVersion()));
 
         this.getLogger().info(localizationManager.getPhrase("loading-properties"));
-        if (!SFS.fileExists(this._paths.data + "pocketnode.json")) {
-            SFS.copy(this._paths.file + "pocketnode/resources/pocketnode.json", this._paths.data + "pocketnode.json");
-        }
         this._config = new Config(this.getDataPath() + "pocketnode.json", Config.JSON, {});
         this._debuggingLevel = this._config.getNested("debugging.level", 0);
 
@@ -92,8 +89,6 @@ class Server {
 
         this.getLogger().info("This server is running " + this.getName() + " version " + this.getPocketNodeVersion() + " \"" + this.getCodeName() + "\" (API " + this.getApiVersion() + ")");
         this.getLogger().info(localizationManager.getPhrase("license"));
-
-        this.getLogger().info(localizationManager.getPhrase("done").replace("{{time}}", Date.now() - this._pocketnode.START_TIME));
 
         this._commandMap = new CommandMap(this);
         this.registerDefaultCommands();
@@ -257,12 +252,11 @@ class Server {
     }
 
     start() {
-
         //block banned ips
 
         this._tickCounter = 0;
 
-        this.getLogger().info("Done (" + (Date.now() - this._pocketnode.START_TIME) + "ms)!");
+        this.getLogger().info(this.localizationManager.getPhrase("done").replace("{{time}}", Date.now() - this._pocketnode.START_TIME));
 
         this.tickProcessor();
         RuntimeBlockMapping.init();

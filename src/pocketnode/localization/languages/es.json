@@ -10,6 +10,6 @@
     "enabling-plugin": "Habilitando {{plugin}}",
     "server-info": "Este servidor ejecuta la versión de {{name}} {{version}} \"{{version-name}}\" (API {{api}})",
     "license": "PocketNode se distribuye bajo la Licencia GPLv3",
-    "done": "Hecho ({{time}} ms)!"
+    "done": "Hecho ({{time}}ms)!"
   }
 }

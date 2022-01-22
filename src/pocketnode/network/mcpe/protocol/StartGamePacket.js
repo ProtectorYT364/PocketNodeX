@@ -2,6 +2,7 @@ const DataPacket = require("./DataPacket");
 const ProtocolInfo = require("./ProtocolInfo");
 
 const fs = require('fs');
+const ServerName = require("../../../../raknet/server/ServerName");
 
 "use strict";
 
@@ -82,7 +83,7 @@ class StartGamePacket extends DataPacket {
         this.writeBool(false); // isNewNether
         this.writeBool(false); // experimentalGameplayOverride
         this.writeString(''); // random level uuid
-        this.writeString('test'); // world name
+        this.writeString("world"); // world name
         this.writeString(''); // template content identity
 
         this.writeByte(0); // is trial

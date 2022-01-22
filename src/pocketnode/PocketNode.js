@@ -6,6 +6,7 @@ const Logger = require("./logger/Logger");
 const Server = require("./Server");
 const localizationManager = require("./localization/localizationManager");
 const Config = require("./utils/Config");
+const SFS = require("./utils/SimpleFileSystem");
 
 function PocketNode(paths) {
     this.START_TIME = Date.now();
@@ -27,6 +28,10 @@ function PocketNode(paths) {
                 path[i] = paths[i];
             }
         }
+    }
+
+    if (!SFS.fileExists(path.data + "pocketnode.json")) {
+        SFS.copy(path.file + "pocketnode/resources/pocketnode.json", path.data + "pocketnode.json");
     }
 
     let config = new Config(path.data + "pocketnode.json", Config.JSON, {});
