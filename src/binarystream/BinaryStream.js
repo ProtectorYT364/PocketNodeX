@@ -513,8 +513,8 @@ class BinaryStream {
      */
     readVarInt() {
         let raw = this.readUnsignedVarInt();
-        let tmp = (((raw << 31) >> 31) ^ raw) >> 1;
-        return tmp ^ (raw & (1 << 31));
+        let tmp = (((raw << 63) >> 63) ^ raw) >> 1;
+        return tmp ^ (raw & (1 << 63));
     }
 
     /**
@@ -522,7 +522,7 @@ class BinaryStream {
      * @return {BinaryStream}
      */
     writeVarInt(v) {
-        v <<= 32 >> 0;
+        v <<= 32 >> 32;
         return this.writeUnsignedVarInt((v << 1) ^ (v >> 31));
     }
 
@@ -565,8 +565,8 @@ class BinaryStream {
      */
     readVarLong() {
         let raw = this.readUnsignedVarLong();
-        let tmp = (((raw << 31) >> 31) ^ raw) >> 1;
-        return tmp ^ (raw & (1 << 31));
+        let tmp = (((raw << 63) >> 63) ^ raw) >> 1;
+        return tmp ^ (raw & (1 << 63));
     }
 
     /**
@@ -574,7 +574,7 @@ class BinaryStream {
      * @return {BinaryStream}
      */
     writeVarLong(v) {
-        return this.writeUnsignedVarLong((v << 1) ^ (v >> 31));
+        return this.writeUnsignedVarLong((v << 1) ^ (v >> 63));
     }
 
     /**
@@ -601,7 +601,7 @@ class BinaryStream {
                 addr = addr.join(".");
                 port = this.readShort();
                 break;
-            //todo: add ipv6 support
+            // add ipv6 support
         }
         return {ip: addr, port: port, version: version};
     }
