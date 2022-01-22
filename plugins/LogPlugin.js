@@ -1,6 +1,4 @@
 const TextFormat = pocketnode("utils/TextFormat");
-const Command = pocketnode("command/Command");
-const Player = pocketnode("player/Player");
 const PluginManifest = pocketnode("plugin/PluginManifest");
 const PluginBase = pocketnode("plugin/PluginBase");
 
@@ -9,7 +7,7 @@ let manifest = new PluginManifest({
     version: "1.0.0",
     api: "1.0.0",
     author: "VaxPex",
-    description: "Title Command"
+    description: "Log plugin"
 });
 
 class LogPlugin extends PluginBase {
