@@ -35,8 +35,6 @@ class SkinImage {
                 return new this(64, 32, data);
             case 64 * 64 * 4:
                 return new this(64, 64, data);
-            case 128 * 64 * 4:
-                return new this(128, 64, data);
             case 128 * 128 * 4:
                 return new this(128, 128, data);
         }

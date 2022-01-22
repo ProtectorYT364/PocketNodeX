@@ -43,6 +43,11 @@ class PlayerListPacket extends DataPacket {
 
             this.entries[i] = entry;
         }
+        if(this.type === PlayerListPacket.TYPE_ADD){
+            for(let i = 0; i < count; ++i){
+                this.entries[i].skinData.setVerified(this.readBool());
+            }
+        }
     }
 
     _encodePayload() {
@@ -63,6 +68,11 @@ class PlayerListPacket extends DataPacket {
                 this.writeUUID(entry.uuid);
             }
         });
+        if(this.type === PlayerListPacket.TYPE_ADD){
+            this.entries.forEach(entry => {
+                this.writeBool(entry.skinData.isVerified());
+            });
+        }
     }
 }
 module.exports = PlayerListPacket;

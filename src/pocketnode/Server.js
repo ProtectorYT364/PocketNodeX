@@ -474,6 +474,7 @@ class Server {
 
     broadcastMessage(message, recipients = this.getOnlinePlayers()) {
         recipients.forEach(recipient => recipient.sendMessage(message));
+        this.getLogger().info(message);
 
         return recipients.length;
     }

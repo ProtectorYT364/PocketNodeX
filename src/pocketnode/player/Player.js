@@ -62,6 +62,10 @@ const Human = require("../entity/Human");
 const Skin = require("../entity/Skin");
 
 const ResourcePack = require("../resourcepacks/ResourcePack");
+const {ucfirst} = require("locutus/php/strings");
+const {array_values} = require("locutus/php/array");
+const PersonaPieceTintColor = require("../network/mcpe/protocol/types/PersonaPieceTintColor");
+const PersonaSkinPiece = require("../network/mcpe/protocol/types/PersonaSkinPiece");
 
 /**
  * Main class that handles networking, recovery, and packet sending to the server part
@@ -366,25 +370,40 @@ class Player extends Human {
         let animations = [];
         packet.clientData['AnimatedImageData'].forEach(animation => {
             animations.push(new SkinAnimation(new SkinImage(
-                animation['ImageHeight'],
-                animation['ImageWidth'],
-                Base64.decode(animation['Image'], true)),
+                    animation['ImageHeight'],
+                    animation['ImageWidth'],
+                    Base64.decode(animation['Image'], true)),
                 animation['Type'], animation['Frames']
             ));
         });
 
+        let personaPieces = [];
+        packet.clientData["PersonaPieces"].forEach(piece => {
+            personaPieces.push(new PersonaSkinPiece(piece["PieceId"], piece["PieceType"], piece["PackId"], piece["IsDefault"], piece["ProductId"]));
+        });
+
+        let pieceTintColors = [];
+        packet.clientData["PieceTintColors"].forEach(tintColor => {
+            pieceTintColors.push(new PersonaPieceTintColor(tintColor["PieceType"], tintColor["Colors"]));
+        });
+
         let skinData = new SkinData(
             packet.clientData['SkinId'],
-            Base64.decode(packet.clientData['SkinResourcePatch'] || "", true),
+            Base64.decode(packet.clientData['SkinResourcePatch'] ?? "", true),
             new SkinImage(packet.clientData['SkinImageHeight'], packet.clientData['SkinImageWidth'], Base64.decode(packet.clientData['SkinData'], true)),
             animations,
-            new SkinImage(packet.clientData['CapeImageHeight'], packet.clientData['CapeImageWidth'], Base64.decode(packet.clientData['CapeData'] || "", true)),
-            Base64.decode(packet.clientData['SkinGeometryData'] || "", true),
-            Base64.decode(packet.clientData['SkinAnimationData'] || "", true),
-            packet.clientData['PremiumSkin'] || false,
-            packet.clientData['PersonaSkin'] || false,
-            packet.clientData['CapeOnClassicSkin'] || false,
-            packet.clientData['CapeId'] || ""
+            new SkinImage(packet.clientData['CapeImageHeight'], packet.clientData['CapeImageWidth'], Base64.decode(packet.clientData['CapeData'] ?? "", true)),
+            Base64.decode(packet.clientData['SkinGeometryData'] ?? "", true),
+            Base64.decode(packet.clientData['SkinAnimationData'] ?? "", true),
+            packet.clientData['PremiumSkin'] ?? false,
+            packet.clientData['PersonaSkin'] ?? false,
+            packet.clientData['CapeOnClassicSkin'] ?? false,
+            packet.clientData['CapeId'] ?? "",
+            packet.clientData["ArmSize"] ?? SkinData.ARM_SIZE_WIDE,
+            packet.clientData["SkinColor"] ?? "",
+            personaPieces,
+            pieceTintColors,
+            true
         );
 
         let skin = SkinAdapterSingleton.get().fromSkinData(skinData);
@@ -422,14 +441,7 @@ class Player extends Human {
     doFirstSpawn() {
         this.spawned = true;
 
-        //this.sendPlayStatus(PlayStatusPacket.PLAYER_SPAWN);
-
-        // let ev = new PlayerJoinEvent(this, "test");
-        // this.server.getPluginManager().callEvent(ev);
-        //
-        // if (ev.getJoinMessage().length > 0){
-        //     this.server.broadcastMessage(ev.getJoinMessage());
-        // }
+        this.sendPlayStatus(PlayStatusPacket.PLAYER_SPAWN);
 
         this.noDamageTicks = 60;
     }
@@ -470,20 +482,6 @@ class Player extends Human {
     }
 
     _processLogin() {
-        // for (let [, p] of this.server._loggedInPlayers) {
-        //     if (p !== this && p._iusername === this._iusername) {
-        //         if (p.kick("Logged in from another location") === false) {
-        //             this.close(this.getLeaveMessage(), "Logged in from another location");
-        //             return;
-        //         }
-        //     } else if (p.loggedIn/* && uuids equal*/) {
-        //         if (p.kick("Logged in from another location") === false) {
-        //             this.close(this.getLeaveMessage(), "Logged in from another location");
-        //             return;
-        //         }
-        //     }
-        // }
-
         this.sendPlayStatus(PlayStatusPacket.LOGIN_SUCCESS);
 
         this.loggedIn = true;
@@ -634,7 +632,7 @@ class Player extends Human {
         }
     }
 
-    sendSpawnPacket(player){
+    sendSpawnPacket(player) {
         let pk = new AddActorPacket();
         pk.entityRuntimeId = this.id;
         pk.type = 63;
@@ -723,61 +721,14 @@ class Player extends Human {
     }
 
     completeLoginSequence() {
-
         //let pos = this.namedtag.getListTag("Pos").getAllValues();
         //this.usedChunks[Level.chunkHash(pos[0] >> 4, pos[2]) >> 4] = false;
 
         let pk = new StartGamePacket();
-        // pk.entityUniqueId = this.id;
-        // pk.entityRuntimeId = this.id;
-        // pk.playerGamemode = Player.getClientFriendlyGamemode(this.gamemode);
-        //
-        // pk.playerPosition = new Vector3(0, 5.5, 0);
-        //
-        // pk.pitch = this._pitch;
-        // pk.yaw = this._yaw;
-        // pk.seed = 0xdeadbeef;
-        // pk.dimension = 0; //TODO
-        // pk.levelGamemode = this.server.getGamemode();
-        // pk.difficulty = 1; //TODO
-        // [pk.spawnX, pk.spawnY, pk.spawnZ] = [0, 6.5, 0];
-        // pk.hasAchievementsDisabled = true;
-        // pk.time = 0;
-        // pk.eduEditionOffer = 0;
-        // pk.rainLevel = 0;
-        // pk.lightningLevel = 0;
-        // pk.commandsEnabled = true;
-        // pk.levelId = "";
-        // pk.levelName = this.server.getMotd();
-        // pk.gameRules = [
-        //     new GameRule(GameRule.COMMAND_BLOCK_OUTPUT, true),
-        //     new GameRule(GameRule.DO_DAYLIGHT_CYCLE, true),
-        //     new GameRule(GameRule.DO_ENTITY_DROPS, true),
-        //     new GameRule(GameRule.DO_FIRE_TICK, true),
-        //     new GameRule(GameRule.DO_MOB_LOOT, true),
-        //     new GameRule(GameRule.DO_MOB_SPAWNING, true),
-        //     new GameRule(GameRule.DO_TILE_DROPS, true),
-        //     new GameRule(GameRule.DO_WEATHER_CYCLE, true),
-        //     new GameRule(GameRule.DROWNING_DAMAGE, true),
-        //     new GameRule(GameRule.FALL_DAMAGE, true),
-        //     new GameRule(GameRule.FIRE_DAMAGE, true),
-        //     new GameRule(GameRule.KEEP_INVENTORY, false),
-        //     new GameRule(GameRule.MOB_GRIEFING, true),
-        //     new GameRule(GameRule.NATURAL_REGENERATION, true),
-        //     new GameRule(GameRule.PVP, true),
-        //     new GameRule(GameRule.SEND_COMMAND_FEEDBACK, true),
-        //     new GameRule(GameRule.SHOW_COORDINATES, true),
-        //     new GameRule(GameRule.RANDOM_TICK_SPEED, 3),
-        //     new GameRule(GameRule.TNT_EXPLODES, true)
-        // ];
         this.dataPacket(pk);
 
         this.sendDataPacket(new AvailableActorIdentifiersPacket());
         this.sendDataPacket(new BiomeDefinitionListPacket());
-
-        // this.level.sendTime(this);
-
-        // this.sendPlayStatus(PlayStatusPacket.PLAYER_SPAWN, true);
 
         this.sendAttributes(true);
 
@@ -786,7 +737,7 @@ class Player extends Human {
             "is attempting to join"
         ].join(" "));
 
-        //this.sendCommandData();
+        this.sendCommandData();
         this.sendSettings();  // TODO: if i send this, i cannot see blocks
         // this.sendPotionEffects(this);
 
@@ -797,8 +748,6 @@ class Player extends Human {
 
         // this.server.sendFullPlayerListData(this);
 
-        // this.sendPlayStatus(PlayStatusPacket.PLAYER_SPAWN);
-
         let ev = new PlayerJoinEvent(this, TextFormat.YELLOW + this.getName() + " joined the game");
         this.server.getEventSystem().callEvent(ev);
         if (ev.getJoinMessage().length > 0) {
@@ -806,12 +755,12 @@ class Player extends Human {
         } else {
             this.server.getLogger().warning("Player join message is blank or null.");
         }
-        
+
         // spawn to all
-        // this.server._playerList.forEach(player => {
-        //     if (player === this) return;
-        //     this.sendSpawnPacket(player);
-        // });
+        this.server._playerList.forEach(player => {
+            if (player === this) return;
+            this.sendSpawnPacket(player);
+        });
     }
 
     sendCommandData() {
@@ -844,8 +793,8 @@ class Player extends Human {
                             aliases.push(data.commandName);
                         }
                         data.aliases = new CommandEnum();
-                        data.aliases.enumName = command.getName().charAt(0).toUpperCase() + command.getName().substring(1) + "Aliases";
-                        data.aliases.enumValues = aliases;
+                        data.aliases.enumName = ucfirst(command.getName()) + "Aliases";
+                        data.aliases.enumValues = array_values(aliases);
                     }
 
                     pk.commandData[command.getName()] = data;
@@ -857,7 +806,7 @@ class Player extends Human {
     }
 
     chat(message) {
-        message = TextFormat.clean(message, false);//this._removeFormat);
+        message = TextFormat.clean(message, false);
 
         message = message.split("\n");
         for (let i in message) {
@@ -871,7 +820,6 @@ class Player extends Human {
                     this.server.getCommandMap().dispatchCommand(this, messagePart.substr(1));
                 } else {
                     let msg = "<:player> :message".replace(":player", this.getName()).replace(":message", messagePart);
-                    this.server.getLogger().info(msg);
                     this.server.broadcastMessage(msg);
                 }
             }
@@ -1016,7 +964,7 @@ class Player extends Human {
 
     //call every tick
     processMovement() {
-        let newPos = this.newPosition;
+        //let newPos = this.newPosition;
         //let distanceSquared = newPos.distanceSquared(this);
 
         //let dx = newPos.getX() - this.newPosition.getX();
@@ -1219,12 +1167,10 @@ class Player extends Human {
                 this.jump();
                 break;
             case  PlayerActionPacket.ACTION_START_SPRINT:
-
-                console.log("PlayerActionHandler sprint toggled");
-                //todo this.toggleSprint(true);
+                this.setSprinting(true);
                 break;
             case PlayerActionPacket.ACTION_STOP_SPRINT:
-                //todo this.toggleSprint(false);
+                this.setSprinting(false);
                 break;
             case PlayerActionPacket.ACTION_START_SNEAK:
                 //todo this.toggleSneak(true)
@@ -1323,11 +1269,13 @@ class Player extends Human {
         this.dataPacket(pk);
 
         if (this.spawned === false) {
-            // this.player.sendPlayStatus(PlayStatusPacket.PLAYER_SPAWN);
-            // this.spawned = true;
             this.doFirstSpawn();
             console.log("Chunk");
         }
+    }
+
+    getServer(){
+        return this.server;
     }
 
     /**

@@ -16,7 +16,7 @@ class PluginsCommand extends Command {
             list += (plugin.isEnabled() ? TextFormat.GREEN : TextFormat.RED) + plugin.getFullName();
         });
 
-        sender.sendMessage("Plugin(s) (" + plugins.length + "): " + list);
+        sender.sendMessage("Plugins (" + plugins.length + "): " + list);
     }
 }
 

@@ -3,6 +3,9 @@ const SkinAnimation = require('./SkinAnimation');
 
 class SkinData {
 
+    static ARM_SIZE_SLIM = "slim";
+    static ARM_SIZE_WIDE = "wide";
+
     /** @type {string} */
     _skinId;
     /** @type {string} */
@@ -25,6 +28,16 @@ class SkinData {
     _personaCapeOnClassic;
     /** @type {string} */
     _capeId;
+    /** @type {string} */
+    _armSize;
+    /** @type {string} */
+    _skinColor;
+    /** @type {PersonaSkinPiece[]} */
+    _personaPieces;
+    /** @type {PersonaPieceTintColor[]} */
+    _pieceTintColors;
+    /** @type {boolean} */
+    _isVerified;
 
     /**
      * @param skinId {string}
@@ -38,8 +51,13 @@ class SkinData {
      * @param persona {boolean}
      * @param personaCapeOnClassic {boolean}
      * @param capeId {string}
+     * @param armSize
+     * @param skinColor
+     * @param personaPieces
+     * @param pieceTintColors
+     * @param isVerified
      */
-    constructor(skinId, resourcePatch, skinImage, animations = [], capeImage = null, geometryData = '', animationData = '', premium = false, persona = false, personaCapeOnClassic = false, capeId = '') {
+    constructor(skinId, resourcePatch, skinImage, animations = [], capeImage = null, geometryData = '', animationData = '', premium = false, persona = false, personaCapeOnClassic = false, capeId = '', armSize = SkinData.ARM_SIZE_WIDE, skinColor = "", personaPieces = [], pieceTintColors = [], isVerified = false) {
         this._skinId = skinId;
         this._resourcePatch = resourcePatch;
         this._skinImage = skinImage;
@@ -51,6 +69,11 @@ class SkinData {
         this._persona = persona;
         this._personaCapeOnClassic = personaCapeOnClassic;
         this._capeId = capeId;
+        this._armSize = armSize;
+        this._skinColor = skinColor;
+        this._personaPieces = personaPieces;
+        this._pieceTintColors = pieceTintColors;
+        this._isVerified = isVerified;
     }
 
     /** @type {string} */
@@ -107,5 +130,36 @@ class SkinData {
     getCapeId() {
         return this._capeId;
     }
+
+    getArmSize() {
+        return this._armSize;
+    }
+
+    getSkinColor() {
+        return this._skinColor;
+    }
+
+    /**
+     * @returns {PersonaSkinPiece[]}
+     */
+    getPersonaPieces() {
+        return this._personaPieces;
+    }
+
+    /**
+     * @returns {PersonaPieceTintColor[]}
+     */
+    getPieceTintColors() {
+        return this._pieceTintColors;
+    }
+
+    isVerified() {
+        return this._isVerified;
+    }
+
+    setVerified(verified) {
+        this._isVerified = verified;
+    }
 }
+
 module.exports = SkinData;

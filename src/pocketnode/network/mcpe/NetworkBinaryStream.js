@@ -7,6 +7,9 @@ const SkinImage = require('./protocol/types/SkinImage');
 const SkinAnimation = require('./protocol/types/SkinAnimation');
 const SkinData = require('./protocol/types/SkinData');
 const EntityLink = require('./protocol/types/EntityLink');
+const {count} = require("locutus/php/array");
+const PersonaPieceTintColor = require("./protocol/types/PersonaPieceTintColor");
+const PersonaSkinPiece = require("./protocol/types/PersonaSkinPiece");
 
 class NetworkBinaryStream extends require("../../../binarystream/BinaryStream") {
 
@@ -250,8 +253,36 @@ class NetworkBinaryStream extends require("../../../binarystream/BinaryStream") 
         let capeOnClassic = this.readBool();
         let capeId = this.readString();
         // let fullSkinId = this.readString();
+        let armSize = this.readString();
+        let skinColor = this.readString();
+        let personaPieceCount = this.readLInt();
+        let personaPieces = [];
+        let pieceId, pieceType, packId, isDefaultPiece, productId;
+        for(let i = 0; i < personaPieceCount; ++i){
+            personaPieces.push(new PersonaSkinPiece(
+                pieceId = this.readString(),
+                pieceType = this.readString(),
+                packId = this.readString(),
+                isDefaultPiece = this.readBool(),
+                productId = this.readString()
+            ));
+        }
+        let pieceTintColorCount = this.readLInt();
+        let pieceTintColors = [];
+        for(let i = 0; i < pieceTintColorCount; ++i){
+            pieceType = this.readString();
+            let colorCount = this.readLInt();
+            let colors = [];
+            for(let j = 0; j < colorCount; ++j){
+                colors.push(this.readString());
+            }
+            pieceTintColors.push(new PersonaPieceTintColor(
+                pieceType,
+                colors
+            ));
+        }
 
-        return new SkinData(skinId, skinResourcePatch, skinData, animations, capeData, geometryData, animationData, premium, persona, capeOnClassic, capeId);
+        return new SkinData(skinId, skinResourcePatch, skinData, animations, capeData, geometryData, animationData, premium, persona, capeOnClassic, capeId, armSize, skinColor, personaPieces, pieceTintColors);
     }
 
     /** @param skin {SkinData} */
@@ -273,6 +304,25 @@ class NetworkBinaryStream extends require("../../../binarystream/BinaryStream") 
         this.writeString(skin.getCapeId());
 
         this.writeString(UUID.stringFromRandom());
+
+        this.writeString(skin.getArmSize());
+        this.writeString(skin.getSkinColor());
+        this.writeLInt(count(skin.getPersonaPieces()));
+        skin.getPersonaPieces().forEach(piece => {
+            this.writeString(piece.getPieceId());
+            this.writeString(piece.getPieceType());
+            this.writeString(piece.getPackId());
+            this.writeBool(piece.isDefaultPiece());
+            this.writeString(piece.getProductId());
+        });
+        this.writeLInt(count(skin.getPieceTintColors()));
+        skin.getPieceTintColors().forEach(tint => {
+            this.writeString(tint.getPieceType());
+            this.writeLInt(count(tint.getColors()));
+            tint.getColors().forEach(color => {
+                this.writeString(color);
+            });
+        });
     }
 
     writeByteRotation(rotation) {

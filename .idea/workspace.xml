@@ -2,20 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fae901bb-40a3-4b37-a599-b130e892034e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/pocketnode/network/mcpe/protocol/types/PersonaPieceTintColor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pocketnode/network/mcpe/protocol/types/PersonaSkinPiece.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pocketnode/network/PlayerNetworkSessionAdapter.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pocketnode/network/PlayerNetworkSessionAdapter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pocketnode/Server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pocketnode/Server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pocketnode/entity/Entity.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pocketnode/entity/Entity.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pocketnode/network/mcpe/NetworkBinaryStream.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pocketnode/network/mcpe/NetworkBinaryStream.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pocketnode/network/mcpe/protocol/PlayerListPacket.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pocketnode/network/mcpe/protocol/PlayerListPacket.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pocketnode/network/mcpe/protocol/PlayerSkinPacket.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pocketnode/network/mcpe/protocol/PlayerSkinPacket.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pocketnode/network/mcpe/protocol/types/SkinData.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pocketnode/network/mcpe/protocol/types/SkinData.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pocketnode/player/Player.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pocketnode/player/Player.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pocketnode/utils/UUID.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pocketnode/utils/UUID.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pocketnode/utils/methods/Globals.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pocketnode/utils/methods/Globals.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FavoritesManager">
-    <favorites_list name="PocketNode" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -27,11 +29,16 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="JsFlowSettings">
-    <service-enabled>true</service-enabled>
-    <exe-path />
-    <other-services-enabled>true</other-services-enabled>
-    <auto-save>true</auto-save>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/package.json" />
@@ -42,27 +49,28 @@
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
-    <property name="javascript.nodejs.core.library.configured.version" value="12.13.1" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/start.js" />
+    <property name="javascript.nodejs.core.library.configured.version" value="16.11.0" />
+    <property name="javascript.nodejs.core.library.typings.version" value="16.11.0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
+    <property name="nodejs_interpreter_path" value="$PROJECT_DIR$/../../../../Program Files/nodejs/node" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2019.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -93,6 +101,7 @@
       </list>
     </option>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="project-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -162,44 +171,22 @@
       <workItem from="1566832726879" duration="3059000" />
       <workItem from="1575403420362" duration="10675000" />
       <workItem from="1575452514463" duration="8970000" />
+      <workItem from="1642835941487" duration="2268000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="550" y="25" key="#Node.js_and_NPM" timestamp="1575404138913">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="550" y="25" key="#Node.js_and_NPM/0.0.1366.728@0.0.1366.728" timestamp="1575404138913" />
-    <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1575404205133">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1575404205133" />
-    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1575404203604">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1575404203604" />
-    <state width="661" height="177" key="GridCell.Tab.0.bottom" timestamp="1575414659366">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="661" height="177" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1575414659366" />
-    <state width="661" height="177" key="GridCell.Tab.0.center" timestamp="1575414659365">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="661" height="177" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1575414659365" />
-    <state width="661" height="177" key="GridCell.Tab.0.left" timestamp="1575414659365">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="661" height="177" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1575414659365" />
-    <state width="661" height="177" key="GridCell.Tab.0.right" timestamp="1575414659366">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="661" height="177" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1575414659366" />
-    <state x="184" y="6" key="SettingsEditor" timestamp="1575403725437">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="184" y="6" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1575403725437" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

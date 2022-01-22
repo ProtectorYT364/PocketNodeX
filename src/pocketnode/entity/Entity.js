@@ -946,25 +946,12 @@ class Entity extends Location {
             ;
     }
 
-    isSprinting() {
-        return this.getGenericFlag(self.DATA_FLAG_SPRINTING);
-    }
-
     /**
      *
      * @param flagId {number}
      */
     getGenericFlag(flagId) {
         this.getDataFlag(flagId >= 64 ? self.DATA_FLAGS2 : self.DATA_FLAGS, flagId % 64);
-    }
-
-    /**
-     *
-     * @param propertyId {number}
-     * @param flagId {number}
-     */
-    getDataFlag(propertyId, flagId) {
-        //return Number(this.propertyManager)
     }
 
     /**
@@ -1053,6 +1040,14 @@ class Entity extends Location {
         }
     }
 
+    isSprinting(value) {
+        return this.getGenericFlag(Entity.DATA_FLAG_SPRINTING);
+    }
+
+    setSprinting(value) {
+        return this.setGenericFlag(Entity.DATA_FLAG_SPRINTING, value);
+    }
+
     //TODO: fix
     /*sendData(player, data = null){
 
@@ -1088,10 +1083,6 @@ class Entity extends Location {
         //TODO
         // let changedProperties = this._propertyManager.getDirty();
 
-    }
-
-    isSprinting() {
-        return false; //TODO
     }
 
     isAlive() {
