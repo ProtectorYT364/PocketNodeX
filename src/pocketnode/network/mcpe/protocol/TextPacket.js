@@ -42,8 +42,12 @@ class TextPacket extends DataPacket {
         return 8
     }
 
-    static get TYPE_JSON() {
+    static get TYPE_JSON_WHISPER() {
         return 9
+    }
+
+    static get TYPE_JSON() {
+        return 10
     }
 
     /** @type {number} */
@@ -72,6 +76,7 @@ class TextPacket extends DataPacket {
             case TextPacket.TYPE_RAW:
             case TextPacket.TYPE_TIP:
             case TextPacket.TYPE_SYSTEM:
+            case TextPacket.TYPE_JSON_WHISPER:
             case TextPacket.TYPE_JSON:
                 this.message = this.readString();
                 break;
@@ -101,6 +106,7 @@ class TextPacket extends DataPacket {
             case TextPacket.TYPE_RAW:
             case TextPacket.TYPE_TIP:
             case TextPacket.TYPE_SYSTEM:
+            case TextPacket.TYPE_JSON_WHISPER:
             case TextPacket.TYPE_JSON:
                 this.writeString(this.message);
                 break;

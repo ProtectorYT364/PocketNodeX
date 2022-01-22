@@ -76,12 +76,12 @@ class StartGamePacket extends DataPacket {
         this.writeByte(0); // from world template
         this.writeByte(0); // world template option locked
         this.writeByte(1); // only spawn v1 villagers
-
         this.writeString(ProtocolInfo.VERSION); // vanilla version
         this.writeLInt(0); // limitedWorldWidth
         this.writeLInt(0); // limitedWorldLength
         this.writeBool(false); // isNewNether
-        this.writeBool(false); // experimentalGameplayOverride
+        this.writeBool(null); // experimentalGameplayOverride
+
         this.writeString(''); // random level uuid
         this.writeString("world"); // world name
         this.writeString(''); // template content identity
