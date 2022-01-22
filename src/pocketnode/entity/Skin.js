@@ -3,8 +3,7 @@ class Skin {
     static ACCEPTED_SKIN_SIZES = [
         64 * 32 * 4,
         64 * 64 * 4,
-        128 * 128 * 4,
-        64 * 32 + 6
+        128 * 128 * 4
     ];
 
     /** @type {string} */
@@ -34,7 +33,6 @@ class Skin {
     }
 
     /**
-     * @deprecated
      * @return {boolean}
      */
     isValid() {

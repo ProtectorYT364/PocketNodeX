@@ -66,6 +66,7 @@ const {ucfirst} = require("locutus/php/strings");
 const {array_values} = require("locutus/php/array");
 const PersonaPieceTintColor = require("../network/mcpe/protocol/types/PersonaPieceTintColor");
 const PersonaSkinPiece = require("../network/mcpe/protocol/types/PersonaSkinPiece");
+const ProtocolInfo = require("../network/mcpe/protocol/ProtocolInfo");
 
 /**
  * Main class that handles networking, recovery, and packet sending to the server part
@@ -126,7 +127,7 @@ class Player extends Human {
             return false;
         }
 
-        return name.toLowerCase() !== "rcon" && name.toLowerCase() !== "console" && name.length >= 1 && name.length <= 16 && /[^A-Za-z0-9_ ]/.test(name);
+        return name.toLowerCase() !== "rcon" && name.toLowerCase() !== "console" && name.length >= 1 && name.length <= 16 && /[^A-Za-z0-9_&* ]/.test(name);
     }
 
     static getClientFriendlyGamemode(gamemode) {
@@ -222,20 +223,20 @@ class Player extends Human {
      * @return {boolean}
      */
     isBanned() {
-        this.server.getNameBans().isBanned(this._username);
+        return this.server.getNameBans().get(this._username) !== null;
     }
 
     /**
      * @param value {boolean}
      */
-    // setBanned(value) {
-    //     if (value) {
-    //         this.server.getNameBans().addBan(this.getName(), null, null, null);
-    //         this.kick("You have been banned");
-    //     } else {
-    //         this.server.getNameBans().remove(this.getName());
-    //     }
-    // }
+    setBanned(value) {
+        if (value) {
+            this.server.getNameBans().set(this.getName());
+            this.kick("You have been banned");
+        } else {
+            this.server.getNameBans().remove(this.getName());
+        }
+    }
 
     /**
      * @return {boolean}
@@ -315,6 +316,10 @@ class Player extends Human {
         return this._username;
     }
 
+    getDisplayName(){
+        return this._displayName;
+    }
+
     getLowerCaseName() {
         return this._iusername;
     }
@@ -333,8 +338,8 @@ class Player extends Human {
             return false;
         }
 
-        /*if(packet.protocol] !== MinecraftInfo.PROTOCOL){
-            if(packet.protocol < MinecraftInfo.PROTOCOL){
+        if(packet.protocol !== ProtocolInfo.PROTOCOL){
+            if(packet.protocol < ProtocolInfo.PROTOCOL){
                 this.sendPlayStatus(PlayStatusPacket.LOGIN_FAILED_CLIENT, true);
             }else{
                 this.sendPlayStatus(PlayStatusPacket.LOGIN_FAILED_SERVER, true);
@@ -343,12 +348,12 @@ class Player extends Human {
             this.close("", "Incompatible Protocol", false);
 
             return true;
-        }*/
+        }
 
-        /*if (Player.isValidUserName(packet.username)) {
+        if (Player.isValidUserName(packet.username)) {
             this.close("", "Invalid Username");
             return true;
-        }*/
+        }
 
         this._username = TextFormat.clean(packet.username);
         this._displayName = this._username;
@@ -365,7 +370,7 @@ class Player extends Human {
         this._randomClientId = packet.clientId;
 
         this._uuid = UUID.fromString(packet.clientUUID);
-        // this._rawUUID = this._uuid.toBinary(); to fix
+        // this._rawUUID = this._uuid.toBinary();
 
         let animations = [];
         packet.clientData['AnimatedImageData'].forEach(animation => {
@@ -515,7 +520,8 @@ class Player extends Human {
             return false;
         }
 
-        //TODO: finish handle
+        this.setSkin(skin);
+        this.sendSkin(this.server.getOnlinePlayers());
     }
 
     dataPacket(packet, needACK = false) {

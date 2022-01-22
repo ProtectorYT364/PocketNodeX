@@ -13,82 +13,69 @@ class StartGamePacket extends DataPacket {
 
     spawnSettings = new SpawnSettings(0, "", 0);
 
+    // int64 = varLong
+    // int32 = varInt
+
+    // vector 3 method
+    // this.writeVarInt(0);
+    // this.writeUnsignedVarInt(4);
+    // this.writeVarInt(0);
     _encodePayload() {
-        // int64 = varLong
-        // int32 = varInt
-
-        this.writeVarLong(1);
-        this.writeUnsignedVarLong(1);
-
+        this.writeEntityUniqueId(1);
+        this.writeEntityRuntimeId(1);
         this.writeVarInt(0); // game mode
 
-        // vector 3
-        this.writeLFloat(0);
-        this.writeLFloat(4);
-        this.writeLFloat(0);
+        this.writeVector3(0, 4, 0); // player pos
 
-        this.writeLFloat(0);
-        this.writeLFloat(0);
+        this.writeLFloat(0); // pitch
+        this.writeLFloat(0); // yaw
 
-        this.writeVarInt(0);
-
+        //Level settings
+        this.writeVarInt(0); // seed
         this.spawnSettings.write(this);
         this.writeVarInt(2); // generator
-        this.writeVarInt(0);
+        this.writeVarInt(0); // worldGamemode
         this.writeVarInt(1); // difficulty
-
-        // world spawn vector 3
-        this.writeVarInt(0);
-        this.writeUnsignedVarInt(4);
-        this.writeVarInt(0);
-
-        this.writeByte(1); // achievement disabled
-
+        this.writeVector3(0, 4, 0); // world spawn vector 3
+        this.writeBool(true); // achievement disabled
         this.writeVarInt(0); // day cycle / time
         this.writeVarInt(0); // edu edition offer
-        this.writeByte(0); // edu features
+        this.writeBool(false); // edu features
         this.writeString(""); // eduProductUUID
         this.writeLFloat(0); // rain lvl
         this.writeLFloat(0); // lightning lvl
-        this.writeByte(0); // confirmed platform locked
-        this.writeByte(1); // multi player game
-        this.writeByte(1); // broadcast to lan
-
+        this.writeBool(false); // confirmed platform locked
+        this.writeBool(true); // multi player game
+        this.writeBool(true); // broadcast to lan
         this.writeVarInt(0); // xbl broadcast mode
         this.writeVarInt(0); // platform broadcast mode
-
-        this.writeByte(1); // commands enabled
-        this.writeByte(0); // texture required
-
-        this.writeUnsignedVarInt(0); // game rules length
+        this.writeBool(true); // commands enabled
+        this.writeBool(false); // texture required
+        // this.writeUnsignedVarInt(0); // game rules length
         this.writeGameRules([]);
-
-        this.writeByte(0); // bonus chest
-        this.writeByte(0); // start with chest
-
+        this.writeBool(0); // bonus chest
+        this.writeBool(false); // start with map
         this.writeVarInt(1); // player perms
-
         this.writeLInt(0); // chunk tick range
-        this.writeByte(0); // locked behavior
-        this.writeByte(0); // locked texture
-        this.writeByte(0); // from locked template
-        this.writeByte(0); // msa gamer tags only
-        this.writeByte(0); // from world template
-        this.writeByte(0); // world template option locked
-        this.writeByte(1); // only spawn v1 villagers
+        this.writeBool(false); // locked behavior
+        this.writeBool(false); // locked texture
+        this.writeBool(false); // from locked template
+        this.writeBool(false); // msa gamer tags only
+        this.writeBool(false); // from world template
+        this.writeBool(false); // world template option locked
+        this.writeBool(false); // only spawn v1 villagers
         this.writeString(ProtocolInfo.VERSION); // vanilla version
         this.writeLInt(0); // limitedWorldWidth
         this.writeLInt(0); // limitedWorldLength
         this.writeBool(false); // isNewNether
-        this.writeBool(false); // experimentalGameplayOverride
+        this.writeBool(null); // experimentalGameplayOverride
 
         this.writeString(''); // random level uuid
         this.writeString("world"); // world name
         this.writeString(''); // template content identity
-
-        this.writeByte(0); // is trial
-        this.writeByte(0); // server auth movement
-        this.writeLong(0); // level time
+        this.writeBool(false); // is trial
+        this.writeBool(false); // server auth movement
+        this.writeLLong(0); // level time
 
         this.writeVarInt(0); // enchantment seed
 

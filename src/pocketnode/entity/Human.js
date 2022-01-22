@@ -111,7 +111,7 @@ class Human extends Entity {
         let pk = new PlayerSkinPacket();
         pk.uuid = this.getUniqueId();
         pk.skin = this._skin;
-        this.server.broadcastPackets(pk, targets)
+        this.server.broadcastPackets(pk, targets);
         // this.server.broadcastPackets(pk, targets || this.hasSpawned)
     }
 

@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fae901bb-40a3-4b37-a599-b130e892034e" name="Default Changelist" comment="session to handler">
-      <change afterPath="$PROJECT_DIR$/plugins/TitleCmd.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="fae901bb-40a3-4b37-a599-b130e892034e" name="Default Changelist" comment="f">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestPlugin.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pocketnode/Server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pocketnode/Server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pocketnode/command/Command.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pocketnode/command/Command.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/binarystream/BinaryStream.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/binarystream/BinaryStream.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pocketnode/entity/Human.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pocketnode/entity/Human.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pocketnode/entity/Skin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pocketnode/entity/Skin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pocketnode/network/mcpe/protocol/StartGamePacket.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pocketnode/network/mcpe/protocol/StartGamePacket.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pocketnode/player/Player.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pocketnode/player/Player.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pocketnode/plugin/PluginManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pocketnode/plugin/PluginManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pocketnode/utils/methods/Globals.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pocketnode/utils/methods/Globals.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,7 +169,7 @@
       <workItem from="1575403420362" duration="10675000" />
       <workItem from="1575452514463" duration="8970000" />
       <workItem from="1642835941487" duration="6350000" />
-      <workItem from="1642848127442" duration="7526000" />
+      <workItem from="1642848127442" duration="9340000" />
     </task>
     <task id="LOCAL-00001" summary="some fix">
       <created>1642838395088</created>
@@ -258,7 +255,21 @@
       <option name="project" value="LOCAL" />
       <updated>1642854234978</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Example plugins">
+      <created>1642855853551</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1642855853551</updated>
+    </task>
+    <task id="LOCAL-00014" summary="f">
+      <created>1642855903066</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1642855903066</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -287,6 +298,8 @@
     <MESSAGE value="add missing packets" />
     <MESSAGE value="add spawn settings" />
     <MESSAGE value="session to handler" />
-    <option name="LAST_COMMIT_MESSAGE" value="session to handler" />
+    <MESSAGE value="Example plugins" />
+    <MESSAGE value="f" />
+    <option name="LAST_COMMIT_MESSAGE" value="f" />
   </component>
 </project>
