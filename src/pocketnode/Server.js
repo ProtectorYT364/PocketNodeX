@@ -1,4 +1,4 @@
-const ProtocolInfo = require("./network/mcpe/Info");
+const ProtocolInfo = require("./network/mcpe/protocol/ProtocolInfo");
 const Config = require("./utils/Config");
 
 const SkinAdapterSingleton = require('./network/mcpe/protocol/types/SkinAdapterSingleton');

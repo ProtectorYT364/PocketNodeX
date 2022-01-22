@@ -1,5 +1,5 @@
 const DataPacket = require("./DataPacket");
-const ProtocolInfo = require("../Info");
+const ProtocolInfo = require("./ProtocolInfo");
 
 const CommandEnum = require("./types/CommandEnum");
 const CommandData = require("./types/CommandData");

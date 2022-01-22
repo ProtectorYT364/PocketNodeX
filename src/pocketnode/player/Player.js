@@ -812,10 +812,6 @@ class Player extends Human {
         for (let i in message) {
             let messagePart = message[i];
             if (messagePart.trim() !== "" && messagePart.length <= 255) {// && this.messageCounter-- > 0){
-                if (messagePart.startsWith("./")) {
-                    messagePart = messagePart.substr(1);
-                }
-
                 if (messagePart.startsWith("/")) {
                     this.server.getCommandMap().dispatchCommand(this, messagePart.substr(1));
                 } else {

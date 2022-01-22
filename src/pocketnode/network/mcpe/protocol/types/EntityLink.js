@@ -15,18 +15,22 @@ class EntityLink {
     type;
     /** @type {boolean} */
     immediate; //for dismounting on mount death
+    /** @type {boolean} */
+    causedByRider;
 
     /**
      * @param fromEntityUniqueId {number}
      * @param toEntityUniqueId {number}
      * @param type {number}
      * @param immediate {boolean}
+     * @param causedByRider
      */
-    constructor(fromEntityUniqueId = null, toEntityUniqueId = null, type = null, immediate = false) {
+    constructor(fromEntityUniqueId = null, toEntityUniqueId = null, type = null, immediate = false, causedByRider = false) {
         this.fromEntityUniqueId = fromEntityUniqueId;
         this.toEntityUniqueId = toEntityUniqueId;
         this.type = type;
         this.immediate = immediate;
+        this.causedByRider = causedByRider;
     }
 }
 module.exports = EntityLink;

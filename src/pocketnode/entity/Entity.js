@@ -754,6 +754,42 @@ class Entity extends Location {
         return 85
     };
 
+    static get DATA_FLAG_AVOIDING_BLOCK() {
+        return 86
+    };
+
+    static get DATA_FLAG_FACING_TARGET_TO_RANGE_ATTACK() {
+        return 87
+    };
+
+    static get DATA_FLAG_HIDDEN_WHEN_INVISIBLE() {
+        return 88
+    }; //??????????????????
+
+    static get DATA_FLAG_IS_IN_UI() {
+        return 89
+    };
+
+    static get DATA_FLAG_STALKING() {
+        return 90
+    };
+
+    static get DATA_FLAG_EMOTING() {
+        return 91
+    };
+
+    static get DATA_FLAG_CELEBRATING() {
+        return 92
+    };
+
+    static get DATA_FLAG_ADMIRING() {
+        return 93
+    };
+
+    static get DATA_FLAG_CELEBRATING_SPECIAL() {
+        return 94
+    };
+
     //86 used by RangedAttackGoal
     //87 used by NearestAttackableTargetGoal
 

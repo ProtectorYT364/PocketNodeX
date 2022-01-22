@@ -1,5 +1,5 @@
 const DataPacket = require("./DataPacket");
-const ProtocolInfo = require("../Info");
+const ProtocolInfo = require("./ProtocolInfo");
 
 const BinaryStream = require("../NetworkBinaryStream");
 const Utils = require("../../../utils/Utils");

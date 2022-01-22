@@ -1,7 +1,9 @@
 const DataPacket = require("./DataPacket");
-const ProtocolInfo = require("../Info");
+const ProtocolInfo = require("./ProtocolInfo");
 
 const NetworkInventoryAction = require("./types/NetworkInventoryAction");
+const collect = require("collect.js");
+const InventoryTransactionChangedSlotsHack = require("./types/InventoryTransactionChangedSlotsHack");
 
 "use strict";
 
@@ -55,8 +57,15 @@ class InventoryTransactionPacket extends DataPacket {
         return 1
     };
 
+    requestId;
+
+    requestChangedSlot;
+
     /** @type {number} */
     transactionType;
+
+    hasItemStackIds;
+
     /** @type {boolean} */
     isCraftingPart = false;
     /** @type {boolean} */
@@ -67,10 +76,19 @@ class InventoryTransactionPacket extends DataPacket {
     trData = null;
 
     _decodePayload() {
+        this.requestId = this.readGenericTypeNetworkId();
+        this.requestChangedSlots = [];
+        if(this.requestId !== 0){
+            for(let i = 0, len = this.readUnsignedVarInt(); i < len; ++i){
+                this.requestChangedSlots.push(InventoryTransactionChangedSlotsHack.read(this));
+            }
+        }
         this.transactionType = this.readUnsignedVarInt();
 
+        this.hasItemStackIds = this.readBool();
+
         for (let i = 0, count = this.readUnsignedVarInt(); i < count; ++i) {
-            this.actions.push(new NetworkInventoryAction().read(this));
+            this.actions.push(new NetworkInventoryAction().read(this, this.hasItemStackIds));
         }
 
         //TODO
@@ -94,11 +112,20 @@ class InventoryTransactionPacket extends DataPacket {
     }
 
     _encodePayload() {
+        this.writeGenericTypeNetworkId(this.requestId);
+        if(this.requestId !== 0){
+            let _count = collect(this.requestChangedSlot);
+            this.writeUnsignedVarInt(_count.count());
+            this.requestChangedSlot.forEach(changedSlots => {
+                changedSlots.write(this);
+            });
+        }
+
         this.writeUnsignedVarInt(this.transactionType);
 
         this.writeUnsignedVarInt(this.actions.length);
         this.actions.forEach(action => {
-            action.write(this);
+            action.write(this, this.hasItemStackIds);
         });
 
         switch (this.transactionType) {

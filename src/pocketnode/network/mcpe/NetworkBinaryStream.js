@@ -209,11 +209,11 @@ class NetworkBinaryStream extends require("../../../binarystream/BinaryStream") 
             this.writeLFloat(attribute.defaultValue);
             this.writeString(attribute.name);
         });
-            // this.writeLFloat(attribute.getMinValue());
-            // this.writeLFloat(attribute.getMaxValue());
-            // this.writeLFloat(attribute.getValue());
-            // this.writeLFloat(attribute.getDefaultValue());
-            // this.writeString(attribute.getName());
+        // this.writeLFloat(attribute.getMinValue());
+        // this.writeLFloat(attribute.getMaxValue());
+        // this.writeLFloat(attribute.getValue());
+        // this.writeLFloat(attribute.getDefaultValue());
+        // this.writeString(attribute.getName());
     }
 
     /** @return {SkinImage} */
@@ -258,7 +258,7 @@ class NetworkBinaryStream extends require("../../../binarystream/BinaryStream") 
         let personaPieceCount = this.readLInt();
         let personaPieces = [];
         let pieceId, pieceType, packId, isDefaultPiece, productId;
-        for(let i = 0; i < personaPieceCount; ++i){
+        for (let i = 0; i < personaPieceCount; ++i) {
             personaPieces.push(new PersonaSkinPiece(
                 pieceId = this.readString(),
                 pieceType = this.readString(),
@@ -269,11 +269,11 @@ class NetworkBinaryStream extends require("../../../binarystream/BinaryStream") 
         }
         let pieceTintColorCount = this.readLInt();
         let pieceTintColors = [];
-        for(let i = 0; i < pieceTintColorCount; ++i){
+        for (let i = 0; i < pieceTintColorCount; ++i) {
             pieceType = this.readString();
             let colorCount = this.readLInt();
             let colors = [];
-            for(let j = 0; j < colorCount; ++j){
+            for (let j = 0; j < colorCount; ++j) {
                 colors.push(this.readString());
             }
             pieceTintColors.push(new PersonaPieceTintColor(
@@ -357,6 +357,7 @@ class NetworkBinaryStream extends require("../../../binarystream/BinaryStream") 
         link.toEntityUniqueId = this.readEntityUniqueId();
         link.type = this.readByte();
         link.immediate = this.readBool();
+        link.causedByRider = this.readBool();
         return link;
     }
 
@@ -366,6 +367,7 @@ class NetworkBinaryStream extends require("../../../binarystream/BinaryStream") 
         this.writeEntityUniqueId(link.toEntityUniqueId);
         this.writeByte(link.type);
         this.writeBool(link.immediate);
+        this.writeBool(link.causedByRider);
     }
 
     readBlockPosition() {
@@ -466,6 +468,14 @@ class NetworkBinaryStream extends require("../../../binarystream/BinaryStream") 
         if (data.type === CommandOriginData.ORIGIN_DEV_CONSOLE || data.type === CommandOriginData.ORIGIN_TEST) {
             this.writeVarLong(data.varlong1);
         }
+    }
+
+    readGenericTypeNetworkId() {
+        return this.readVarInt();
+    }
+
+    writeGenericTypeNetworkId(id) {
+        this.writeVarInt(id);
     }
 }
 

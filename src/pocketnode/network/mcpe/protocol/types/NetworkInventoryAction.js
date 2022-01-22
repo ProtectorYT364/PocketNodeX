@@ -127,9 +127,10 @@ class NetworkInventoryAction {
         this.inventorySlot = -1;
         this.oldItem = null;
         this.newItem = null;
+        newItemStackId = null;
     }
 
-    read(packet) {
+    read(packet, hasItemStackIds) {
         this.sourceType = packet.readUnsignedVarInt();
 
         switch (this.sourceType) {
@@ -159,11 +160,14 @@ class NetworkInventoryAction {
         this.inventorySlot = packet.readUnsignedVarInt();
         this.oldItem = packet.readSlot(); //TODO
         this.newItem = packet.readSlot(); //TODO
+        if(hasItemStackIds){
+            this.newItemStackId = packet.readGenericTypeNetworkId();
+        }
 
         return this;
     }
 
-    write(packet) {
+    write(packet, hasItemStackIds) {
         packet.writeUnsignedVarInt(this.sourceType);
 
         switch (this.sourceType) {
@@ -186,6 +190,12 @@ class NetworkInventoryAction {
         packet.writeUnsignedVarInt(this.inventorySlot);
         packet.writeSlot(this.oldItem);
         packet.writeSlot(this.newItem);
+        if(hasItemStackIds){
+            if(this.newItemStackId === null){
+				throw new Error("Item stack ID for newItem must be provided");
+			}
+			packet.writeGenericTypeNetworkId(this.newItemStackId);
+        }
     }
 
     createInventoryAction(player) {

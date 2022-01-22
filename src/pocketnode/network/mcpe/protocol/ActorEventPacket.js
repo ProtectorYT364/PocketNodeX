@@ -1,5 +1,5 @@
 const DataPacket = require("./DataPacket");
-const ProtocolInfo = require("../Info");
+const ProtocolInfo = require("./ProtocolInfo");
 
 "use strict";
 
@@ -157,8 +157,33 @@ class ActorEventPacket extends DataPacket {
     static get DRAGON_PUKE() {
         return 68
     }; //they call this puke particles
+
     static get ITEM_ENTITY_MERGE() {
         return 69
+    };
+
+    static get START_SWIM() {
+        return 70
+    };
+
+    static get BALLOON_POP() {
+        return 71
+    };
+
+    static get TREASURE_HUNT() {
+        return 72
+    };
+
+    static get AGENT_SUMMON() {
+        return 73
+    };
+
+    static get CHARGED_CROSSBOW() {
+        return 74
+    };
+
+    static get FALL() {
+        return 75
     };
 
     //TODO: add more events

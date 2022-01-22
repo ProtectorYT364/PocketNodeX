@@ -25,7 +25,7 @@ class BatchPacket extends DataPacket {
     _decodePayload() {
         let data = this.readRemaining();
         try {
-            this.payload = new BinaryStream(Zlib.unzipSync(data, {chunkSize: 1024 * 1024 * 2}));
+            this.payload = new BinaryStream(Zlib.inflateRawSync(data, {level: this._compressionLevel, chunkSize: 1024 * 1024 * 2}));
         }catch (e) {
             this.payload = new BinaryStream();
         }
@@ -36,7 +36,7 @@ class BatchPacket extends DataPacket {
     }
 
     _encodePayload() {
-        let buf = Zlib.deflateSync(this.payload.getBuffer(), {level: this._compressionLevel});
+        let buf = Zlib.deflateRawSync(this.payload.getBuffer(), {level: this._compressionLevel});
         this.append(buf);
     }
 

@@ -1,5 +1,5 @@
 const DataPacket = require("./DataPacket");
-const ProtocolInfo = require("../Info");
+const ProtocolInfo = require("./ProtocolInfo");
 
 "use strict";
 
@@ -27,7 +27,13 @@ class AddItemActorPacket extends DataPacket {
     _decodePayload() {
         this.entityUniqueId = this.readEntityUniqueId();
         this.entityRuntimeId = this.readEntityRuntimeId();
-        // todo: this.item = this.readSlot();
+        this.item = this.readSlot();
+    }
+
+    _encodePayload() {
+        this.writeEntityUniqueId(this.entityUniqueId);
+        this.writeEntityRuntimeId(this.entityRuntimeId);
+        this.writeSlot(this.item);
     }
 }
 

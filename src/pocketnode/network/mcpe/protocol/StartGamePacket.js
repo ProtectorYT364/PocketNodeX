@@ -1,5 +1,5 @@
 const DataPacket = require("./DataPacket");
-const ProtocolInfo = require("../Info");
+const ProtocolInfo = require("./ProtocolInfo");
 
 const fs = require('fs');
 
@@ -26,7 +26,10 @@ class StartGamePacket extends DataPacket {
         this.writeLFloat(0);
 
         this.writeVarInt(0);
-        this.writeVarInt(0); // dimension
+        this.writeVarInt();
+        this.writeLShort(0);
+        this.writeString("");
+        this.writeVarInt(0);// dimension
         this.writeVarInt(2); // generator
         this.writeVarInt(0);
         this.writeVarInt(1); // difficulty
@@ -43,6 +46,7 @@ class StartGamePacket extends DataPacket {
         this.writeByte(0); // edu features
 
         this.writeLFloat(0); // rain lvl
+        this.writeString(""); // eduProductUUID
         this.writeLFloat(0); // lightning lvl
 
         this.writeByte(0); // confirmed platform locked
@@ -56,7 +60,7 @@ class StartGamePacket extends DataPacket {
         this.writeByte(0); // texture required
 
         this.writeUnsignedVarInt(0); // game rules length
-        // this.writeGameRules(this.gameRules);
+        this.writeGameRules([]);
 
         this.writeByte(0); // bonus chest
         this.writeByte(0); // start with chest
@@ -72,7 +76,11 @@ class StartGamePacket extends DataPacket {
         this.writeByte(0); // world template option locked
         this.writeByte(1); // only spawn v1 villagers
 
-        this.writeString('1.14.0'); // vanilla version
+        this.writeString(ProtocolInfo.VERSION); // vanilla version
+        this.writeLInt(0); // limitedWorldWidth
+        this.writeLInt(0); // limitedWorldLength
+        this.writeBool(false); // isNewNether
+        this.writeBool(false); // experimentalGameplayOverride
         this.writeString(''); // random level uuid
         this.writeString('test'); // world name
         this.writeString(''); // template content identity
@@ -90,6 +98,7 @@ class StartGamePacket extends DataPacket {
 
         this.writeVarInt(0); // item length
         this.writeString('');
+        this.writeBool(false); // enableNewInventorySystem
     }
 }
 

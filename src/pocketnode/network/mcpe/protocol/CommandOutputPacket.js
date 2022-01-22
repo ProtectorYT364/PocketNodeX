@@ -1,5 +1,5 @@
 const DataPacket = require("./DataPacket");
-const ProtocolInfo = require("../Info");
+const ProtocolInfo = require("./ProtocolInfo");
 const CommandOutputMessage = require("./types/CommandOutputMessage");
 
 "use strict";

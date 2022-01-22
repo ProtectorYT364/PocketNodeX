@@ -65,6 +65,14 @@ const AvailableActorIdentifiersPacket = require("./AvailableActorIdentifiersPack
 const ActorFallPacket = require("./ActorFallPacket");
 const LevelChunkPacket = require("./LevelChunkPacket");
 const ActorPickRequestPacket = require("./ActorPickRequestPacket");
+const CreativeContentPacket = require("./CreativeContentPacket");
+const ItemStackRequestPacket = require("./ItemStackRequestPacket");
+const ItemStackResponsePacket = require("./ItemStackResponsePacket");
+const CodeBuilderPacket = require("./CodeBuilderPacket");
+const UpdatePlayerGameTypePacket = require("./UpdatePlayerGameTypePacket");
+const EmoteListPacket = require("./EmoteListPacket");
+const DebugInfoPacket = require("./DebugInfoPacket");
+const PacketViolationWarningPacket = require("./PacketViolationWarningPacket");
 
 "use strict";
 
@@ -160,6 +168,14 @@ class PacketPool {
         this.registerPacket(AutomationClientConnectPacket);
         this.registerPacket(AvailableActorIdentifiersPacket);
         this.registerPacket(SetTitlePacket);
+        this.registerPacket(CreativeContentPacket);
+        this.registerPacket(ItemStackRequestPacket);
+        this.registerPacket(ItemStackResponsePacket);
+        this.registerPacket(CodeBuilderPacket);
+        this.registerPacket(UpdatePlayerGameTypePacket);
+        this.registerPacket(EmoteListPacket);
+        this.registerPacket(DebugInfoPacket);
+        this.registerPacket(PacketViolationWarningPacket);
     }
 }
 

@@ -264,7 +264,7 @@ class PlayerNetworkSessionAdapter {
         return false;
     }
 
-    handleSetDefaultGameType() {
+    handleSetDefaultGameType(packet) {
         return this.player.handleSetDefaultGameType(packet);
     }
 
@@ -314,7 +314,7 @@ class PlayerNetworkSessionAdapter {
 
     //TODO
     handleBlockPickRequest(packet) {
-        this.player.handleBlockPickRequest(packet);
+        // this.player.handleBlockPickRequest(packet);
     }
 
     handleCommandRequest(packet) {
@@ -326,6 +326,38 @@ class PlayerNetworkSessionAdapter {
             return this.player.chat(packet.message);
         }
 
+        return false;
+    }
+
+    handleItemStackRequest(packet) {
+        return false;
+    }
+
+    handleItemStackResponse(packet) {
+        return false;
+    }
+
+    handleCodeBuilder(packet) {
+        return false;
+    }
+
+    handleUpdatePlayerGameType(packet) {
+        return false;
+    }
+
+    handleCreativeContent(packet) {
+        return false;
+    }
+
+    handleEmoteList(packet) {
+        return false;
+    }
+
+    handleDebugInfo(packet) {
+        return false;
+    }
+
+    handlePacketViolationWarning(packet) {
         return false;
     }
 
