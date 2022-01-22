@@ -31,7 +31,7 @@ class LoginPacket extends DataPacket {
     clientData;
 
     allowBeforeLogin = true;
-    mayHaveUnreadBytes = this.protocol !== undefined && this.protocol !== ProtocolInfo.PROTOCOL;
+    mayHaveUnreadBytes = this.protocol !== ProtocolInfo.PROTOCOL;
 
     _decodePayload() {
         this.protocol = this.readInt();
