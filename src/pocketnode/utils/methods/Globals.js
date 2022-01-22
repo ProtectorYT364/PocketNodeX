@@ -141,7 +141,7 @@ global.mt_rand = function mt_rand(min, max) {
     //   example 1: mt_rand(1, 1)
     //   returns 1: 1
 
-    var argc = arguments.length;
+    let argc = arguments.length;
     if (argc === 0) {
         min = 0;
         max = 2147483647;
@@ -403,9 +403,9 @@ global.str_split = function (string, splitLength) {
     }
 
     string += '';
-    var chunks = [];
-    var pos = 0;
-    var len = string.length;
+    let chunks = [];
+    let pos = 0;
+    let len = string.length;
 
     while (pos < len) {
         chunks.push(string.slice(pos, pos += splitLength));
@@ -431,23 +431,23 @@ global.sleep_until = function (ms) {
  */
 global.createInterval = function (fn, interval) {
     return new (function () {
-        this.baseline = undefined;
+        let timer, baseline = undefined;
         this.run = function () {
-            if (this.baseline === undefined) {
-                this.baseline = Date.now();
+            if (baseline === undefined) {
+                baseline = Date.now();
             }
 
             fn();
 
             let end = Date.now();
-            this.baseline += interval;
+            baseline += interval;
 
-            let nextTick = interval - (end - this.baseline);
+            let nextTick = interval - (end - baseline);
             if (nextTick < 0) nextTick = 0;
-            this.timer = setTimeout(() => this.run(end), nextTick);
+            timer = setTimeout(() => this.run(end), nextTick);
         };
 
-        this.stop = () => clearTimeout(this.timer);
+        this.stop = () => clearTimeout(timer);
     });
 };
 
