@@ -3,6 +3,7 @@ const ProtocolInfo = require("./ProtocolInfo");
 
 const fs = require('fs');
 const ServerName = require("../../../../raknet/server/ServerName");
+const Base64 = require("../../../utils/Base64");
 
 "use strict";
 
@@ -28,9 +29,9 @@ class StartGamePacket extends DataPacket {
 
         this.writeVarInt(0);
 
-        this.writeLShort(0);
-        this.writeString("");
-        this.writeVarInt(0);// dimension
+        this.writeLShort(0); // type default
+        this.writeString(""); // biome name
+        this.writeVarInt(0); // dimension
         this.writeVarInt(2); // generator
         this.writeVarInt(0);
         this.writeVarInt(1); // difficulty

@@ -22,8 +22,7 @@
 	}
 
 	/** @exports nbt */
-
-	var nbt = this;
+	let nbt = this;
 
 	/**
 	 * A mapping from type names to NBT type numbers.
@@ -56,7 +55,7 @@
 	 * @see module:nbt.tagTypes */
 	nbt.tagTypeNames = {};
 	(function() {
-		for (var typeName in nbt.tagTypes) {
+		for (let typeName in nbt.tagTypes) {
 			if (nbt.tagTypes.hasOwnProperty(typeName)) {
 				nbt.tagTypeNames[nbt.tagTypes[typeName]] = typeName;
 			}
@@ -64,12 +63,12 @@
 	})();
 
 	function hasGzipHeader(data) {
-		var head = new Uint8Array(data.slice(0, 2));
+		let head = new Uint8Array(data.slice(0, 2));
 		return head.length === 2 && head[0] === 0x1f && head[1] === 0x8b;
 	}
 
 	function encodeUTF8(str) {
-		var array = [], i, c;
+		let array = [], i, c;
 		for (i = 0; i < str.length; i++) {
 			c = str.charCodeAt(i);
 			if (c < 0x80) {
@@ -92,7 +91,7 @@
 	}
 
 	function decodeUTF8(array) {
-		var codepoints = [], i;
+		let codepoints = [], i;
 		for (i = 0; i < array.length; i++) {
 			if ((array[i] & 0x80) === 0) {
 				codepoints.push(array[i] & 0x7F);
@@ -144,7 +143,7 @@
 	 * @see module:nbt.Reader
 	 *
 	 * @example
-	 * var writer = new nbt.Writer();
+	 * let writer = new nbt.Writer();
 	 *
 	 * // all equivalent
 	 * writer.int(42);
@@ -157,14 +156,14 @@
 	 *
 	 * return writer.buffer; */
 	nbt.Writer = function() {
-		var self = this;
+		let self = this;
 
 		/* Will be resized (x2) on write if necessary. */
-		var buffer = new ArrayBuffer(1024);
+		let buffer = new ArrayBuffer(1024);
 
 		/* These are recreated when the buffer is */
-		var dataView = new DataView(buffer);
-		var arrayView = new Uint8Array(buffer);
+		let dataView = new DataView(buffer);
+		let arrayView = new Uint8Array(buffer);
 
 		/**
 		 * The location in the buffer where bytes are written or read.
@@ -177,18 +176,18 @@
 		// Ensures that the buffer is large enough to write `size` bytes
 		// at the current `self.offset`.
 		function accommodate(size) {
-			var requiredLength = self.offset + size;
+			let requiredLength = self.offset + size;
 			if (buffer.byteLength >= requiredLength) {
 				return;
 			}
 
-			var newLength = buffer.byteLength;
+			let newLength = buffer.byteLength;
 			while (newLength < requiredLength) {
 				newLength *= 2;
 			}
 
-			var newBuffer = new ArrayBuffer(newLength);
-			var newArrayView = new Uint8Array(newBuffer);
+			let newBuffer = new ArrayBuffer(newLength);
+			let newArrayView = new Uint8Array(newBuffer);
 			newArrayView.set(arrayView);
 
 			// If there's a gap between the end of the old buffer
@@ -287,7 +286,7 @@
 		 * @returns {module:nbt.Writer} itself */
 		this[nbt.tagTypes.intArray] = function(value) {
 			this.int(value.length);
-			var i;
+			let i;
 			for (i = 0; i < value.length; i++) {
 				this.int(value[i]);
 			}
@@ -300,7 +299,7 @@
 		 * @returns {module:nbt.Writer} itself */
 		this[nbt.tagTypes.longArray] = function(value) {
 			this.int(value.length);
-			var i;
+			let i;
 			for (i = 0; i < value.length; i++) {
 				this.long(value[i]);
 			}
@@ -312,7 +311,7 @@
 		 * @param {string} value
 		 * @returns {module:nbt.Writer} itself */
 		this[nbt.tagTypes.string] = function(value) {
-			var bytes = encodeUTF8(value);
+			let bytes = encodeUTF8(value);
 			this.short(bytes.length);
 			accommodate(bytes.length);
 			arrayView.set(bytes, this.offset);
@@ -329,7 +328,7 @@
 		this[nbt.tagTypes.list] = function(value) {
 			this.byte(nbt.tagTypes[value.type]);
 			this.int(value.value.length);
-			var i;
+			let i;
 			for (i = 0; i < value.value.length; i++) {
 				this[value.type](value.value[i]);
 			}
@@ -350,7 +349,7 @@
 		 *     bar: { type: 'string', value: 'Hello, World!' }
 		 * }); */
 		this[nbt.tagTypes.compound] = function(value) {
-			var self = this;
+			let self = this;
 			Object.keys(value).map(function (key) {
 				self.byte(nbt.tagTypes[value[key].type]);
 				self.string(key);
@@ -360,7 +359,7 @@
 			return this;
 		};
 
-		var typeName;
+		let typeName;
 		for (typeName in nbt.tagTypes) {
 			if (nbt.tagTypes.hasOwnProperty(typeName)) {
 				this[typeName] = this[nbt.tagTypes[typeName]];
@@ -377,14 +376,14 @@
 	 * @see module:nbt.Writer
 	 *
 	 * @example
-	 * var reader = new nbt.Reader(buf);
+	 * let reader = new nbt.Reader(buf);
 	 * int x = reader.int();
 	 * int y = reader[3]();
 	 * int z = reader[nbt.tagTypes.int](); */
 	nbt.Reader = function(buffer) {
 		if (!buffer) { throw new Error('Argument "buffer" is falsy'); }
 
-		var self = this;
+		let self = this;
 
 		/**
 		 * The current location in the buffer. Can be freely changed
@@ -393,11 +392,11 @@
 		 * @type number */
 		this.offset = 0;
 
-		var arrayView = new Uint8Array(buffer);
-		var dataView = new DataView(arrayView.buffer);
+		let arrayView = new Uint8Array(buffer);
+		let dataView = new DataView(arrayView.buffer);
 
 		function read(dataType, size) {
-			var val = dataView['get' + dataType](self.offset);
+			let val = dataView['get' + dataType](self.offset);
 			self.offset += size;
 			return val;
 		}
@@ -447,9 +446,9 @@
 		 * @method module:nbt.Reader#byteArray
 		 * @returns {Array.<number>} the read array */
 		this[nbt.tagTypes.byteArray] = function() {
-			var length = this.int();
-			var bytes = [];
-			var i;
+			let length = this.int();
+			let bytes = [];
+			let i;
 			for (i = 0; i < length; i++) {
 				bytes.push(this.byte());
 			}
@@ -460,9 +459,9 @@
 		 * @method module:nbt.Reader#intArray
 		 * @returns {Array.<number>} the read array of 32-bit ints */
 		this[nbt.tagTypes.intArray] = function() {
-			var length = this.int();
-			var ints = [];
-			var i;
+			let length = this.int();
+			let ints = [];
+			let i;
 			for (i = 0; i < length; i++) {
 				ints.push(this.int());
 			}
@@ -478,9 +477,9 @@
 		 * @returns {Array.<number>} the read array of 64-bit ints
 		 *     split into [upper, lower] */
 		this[nbt.tagTypes.longArray] = function() {
-			var length = this.int();
-			var longs = [];
-			var i;
+			let length = this.int();
+			let longs = [];
+			let i;
 			for (i = 0; i < length; i++) {
 				longs.push(this.long());
 			}
@@ -491,8 +490,8 @@
 		 * @method module:nbt.Reader#string
 		 * @returns {string} the read string */
 		this[nbt.tagTypes.string] = function() {
-			var length = this.short();
-			var slice = sliceUint8Array(arrayView, this.offset,
+			let length = this.short();
+			let slice = sliceUint8Array(arrayView, this.offset,
 				this.offset + length);
 			this.offset += length;
 			return decodeUTF8(slice);
@@ -506,10 +505,10 @@
 		 * reader.list();
 		 * // -> { type: 'string', values: ['foo', 'bar'] } */
 		this[nbt.tagTypes.list] = function() {
-			var type = this.byte();
-			var length = this.int();
-			var values = [];
-			var i;
+			let type = this.byte();
+			let length = this.int();
+			let values = [];
+			let i;
 			for (i = 0; i < length; i++) {
 				values.push(this[type]());
 			}
@@ -525,20 +524,20 @@
 		 * // -> { foo: { type: int, value: 42 },
 		 * //      bar: { type: string, value: 'Hello! }} */
 		this[nbt.tagTypes.compound] = function() {
-			var values = {};
+			let values = {};
 			while (true) {
-				var type = this.byte();
+				let type = this.byte();
 				if (type === nbt.tagTypes.end) {
 					break;
 				}
-				var name = this.string();
-				var value = this[type]();
+				let name = this.string();
+				let value = this[type]();
 				values[name] = { type: nbt.tagTypeNames[type], value: value };
 			}
 			return values;
 		};
 
-		var typeName;
+		let typeName;
 		for (typeName in nbt.tagTypes) {
 			if (nbt.tagTypes.hasOwnProperty(typeName)) {
 				this[typeName] = this[nbt.tagTypes[typeName]];
@@ -566,7 +565,7 @@
 	nbt.writeUncompressed = function(value) {
 		if (!value) { throw new Error('Argument "value" is falsy'); }
 
-		var writer = new nbt.Writer();
+		let writer = new nbt.Writer();
 
 		writer.byte(nbt.tagTypes.compound);
 		writer.string(value.name);
@@ -598,7 +597,7 @@
 			callback(new Error('No gzip library available at nbt.gzip'), null);
 		} else {
 			try {
-				var data = nbt.writeUncompressed(value);
+				let data = nbt.writeUncompressed(value);
 
 				nbt.gzip(data, callback);
 			} catch(error) {
@@ -623,9 +622,9 @@
 	nbt.parseUncompressed = function(data) {
 		if (!data) { throw new Error('Argument "data" is falsy'); }
 
-		var reader = new nbt.Reader(data);
+		let reader = new nbt.Reader(data);
 
-		var type = reader.byte();
+		let type = reader.byte();
 		if (type !== nbt.tagTypes.compound) {
 			throw new Error('Top tag should be a compound');
 		}
@@ -670,7 +669,7 @@
 	nbt.parse = function(data, callback) {
 		if (!data) { throw new Error('Argument "data" is falsy'); }
 
-		var self = this;
+		let self = this;
 
 		if (!hasGzipHeader(data)) {
 			callback(null, self.parseUncompressed(data));
@@ -679,7 +678,7 @@
 		} else {
 			/* zlib.gunzip take a Buffer, at least in Node, so try to convert
 			   if possible. */
-			var buffer;
+			let buffer;
 			if (data.length) {
 				buffer = data;
 			} else if (typeof Buffer !== 'undefined') {
@@ -759,7 +758,7 @@
 	/**
 	 * Destructively and recursively remove type and value parameters
 	 * from a named compound object. Using nbt.growCompound will often
-	 * not revert to the same variable types.
+	 * not revert to the same letiable types.
 	 *
 	 * Beware:
 	 * - Bigger datatypes than 32 bits are split into arrays, index 0
@@ -825,7 +824,7 @@
 			}
 		}
 
-		var shrinkedObject = {};
+		let shrinkedObject = {};
 		Object.entries(compound.value).forEach(function(entry) {
 			shrinkedObject[entry[0]] = nbt.shrinkCompound(entry[1]);
 		});
@@ -880,9 +879,9 @@
 		}
 
 		if (typeof object === 'number') {
-			var type;
+			let type;
 			if (object % 1 === 0) {
-				var numBytes = Math.max(1, Math.ceil(Math.log2(object) / 8));
+				let numBytes = Math.max(1, Math.ceil(Math.log2(object) / 8));
 				if (numBytes === 1) {
 					type = 'byte';
 				} else if (numBytes <= 2) {
@@ -908,7 +907,7 @@
 					// TODO: could be double list?
 					return { type:'long', value:object };
 			} else {
-				var type = 'list', value;
+				let type = 'list', value;
 				if (object.length === 0) {
 					// impossible to know type of array
 					value = { type:'int', value:object };
@@ -924,9 +923,9 @@
 							})
 						};
 					} else {
-						var type = grow(object[0]).type;
+						let type = grow(object[0]).type;
 						if (type === 'byte' || type === 'int') {
-							var largestValue = object[0];
+							let largestValue = object[0];
 							object.forEach(function(value) {
 								if (largestValue < value) {
 									largestValue = value;
@@ -951,7 +950,7 @@
 			}
 		}
 
-		var grown = { type:'compound', value:{} };
+		let grown = { type:'compound', value:{} };
 
 		Object.entries(object).forEach(function(entry) {
 			grown.value[entry[0]] = grow(entry[1]);

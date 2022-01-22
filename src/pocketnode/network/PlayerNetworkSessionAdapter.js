@@ -329,11 +329,23 @@ class PlayerNetworkSessionAdapter {
         return false;
     }
 
+    handleCreativeContent(packet) {
+        return false;
+    }
+
+    handlePlayerEnchantOptions(packet) {
+        return false;
+    }
+
     handleItemStackRequest(packet) {
         return false;
     }
 
     handleItemStackResponse(packet) {
+        return false;
+    }
+
+    handlePlayerArmorDamage(packet) {
         return false;
     }
 
@@ -345,11 +357,15 @@ class PlayerNetworkSessionAdapter {
         return false;
     }
 
-    handleCreativeContent(packet) {
+    handleEmoteList(packet) {
         return false;
     }
 
-    handleEmoteList(packet) {
+    handlePositionTrackingDBServerBroadcast(packet) {
+        return false;
+    }
+
+    handlePositionTrackingDBClientRequest(packet) {
         return false;
     }
 

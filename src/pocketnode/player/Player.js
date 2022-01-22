@@ -746,7 +746,7 @@ class Player extends Human {
         this.server.addOnlinePlayer(this);
         this.server.onPlayerCompleteLoginSequence(this);
 
-        // this.server.sendFullPlayerListData(this);
+        this.server.sendFullPlayerListData(this);
 
         let ev = new PlayerJoinEvent(this, TextFormat.YELLOW + this.getName() + " joined the game");
         this.server.getEventSystem().callEvent(ev);
@@ -811,7 +811,7 @@ class Player extends Human {
         message = message.split("\n");
         for (let i in message) {
             let messagePart = message[i];
-            if (messagePart.trim() !== "" && messagePart.length <= 255) {// && this.messageCounter-- > 0){
+            if (messagePart.trim() !== "" && messagePart.length <= 255) {
                 if (messagePart.startsWith("/")) {
                     this.server.getCommandMap().dispatchCommand(this, messagePart.substr(1));
                 } else {

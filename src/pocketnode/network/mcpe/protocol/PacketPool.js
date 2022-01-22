@@ -73,6 +73,10 @@ const UpdatePlayerGameTypePacket = require("./UpdatePlayerGameTypePacket");
 const EmoteListPacket = require("./EmoteListPacket");
 const DebugInfoPacket = require("./DebugInfoPacket");
 const PacketViolationWarningPacket = require("./PacketViolationWarningPacket");
+const PositionTrackingDBServerBroadcastPacket = require("./PositionTrackingDBServerBroadcastPacket");
+const PositionTrackingDBClientRequestPacket = require("./PositionTrackingDBClientRequestPacket");
+const PlayerArmorDamagePacket = require("./PlayerArmorDamagePacket");
+const PlayerEnchantOptionsPacket = require("./PlayerEnchantOptionsPacket");
 
 "use strict";
 
@@ -169,11 +173,15 @@ class PacketPool {
         this.registerPacket(AvailableActorIdentifiersPacket);
         this.registerPacket(SetTitlePacket);
         this.registerPacket(CreativeContentPacket);
+        this.registerPacket(PlayerEnchantOptionsPacket);
         this.registerPacket(ItemStackRequestPacket);
         this.registerPacket(ItemStackResponsePacket);
+        this.registerPacket(PlayerArmorDamagePacket);
         this.registerPacket(CodeBuilderPacket);
         this.registerPacket(UpdatePlayerGameTypePacket);
         this.registerPacket(EmoteListPacket);
+        this.registerPacket(PositionTrackingDBServerBroadcastPacket);
+        this.registerPacket(PositionTrackingDBClientRequestPacket);
         this.registerPacket(DebugInfoPacket);
         this.registerPacket(PacketViolationWarningPacket);
     }
