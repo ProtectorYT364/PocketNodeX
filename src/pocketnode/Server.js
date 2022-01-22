@@ -289,7 +289,9 @@ class Server {
 
         this._isRunning = false;
 
-        process.exit(); // fix this later
+        setTimeout(() => {
+            process.exit(1);
+        }, 100 * 30);
     }
 
     /**

@@ -9,7 +9,6 @@ global.binarystream = function (path) {
     return require(Path.normalize(__dirname + "/../../../binarystream/" + path));
 };
 /**
- * @deprecated use them at your own risk... personally i prefer require()... it also give you hints.
  * @param path
  * @return {*}
  */

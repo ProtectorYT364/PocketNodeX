@@ -11,7 +11,7 @@ class Command {
      * @param permission  {string}
      * @param aliases     {array}
      */
-    constructor(name, description, permission, aliases = []) {
+    constructor(name, description, permission = "", aliases = []) {
         this.initVars();
         this.name = name;
         this.description = description;

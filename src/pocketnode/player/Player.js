@@ -580,9 +580,9 @@ class Player extends Human {
     addTitle(title, subtitle = "", fadeIn = -1, stay = -1, fadeOut = -1) {
         this.setTitleDuration(fadeIn, stay, fadeOut);
         if (subtitle !== "") {
-            this.addSubTitle(subtitle);
+            this.snedSubTitle(subtitle);
         }
-        this.sendTitleText(title, SetTitlePacket.TYPE_SET_TITLE);
+        this.sendTitle(title);
     }
 
     /**
@@ -590,8 +590,8 @@ class Player extends Human {
      *
      * @param subtitle {string}
      */
-    addSubTitle(subtitle) {
-        this.sendTitleText(subtitle, SetTitlePacket.TYPE_SET_SUBTITLE);
+    sendSubTitle(subtitle) {
+        this.sendTitle(subtitle, SetTitlePacket.TYPE_SET_SUBTITLE);
     }
 
     /**
@@ -599,8 +599,8 @@ class Player extends Human {
      *
      * @param message {string}
      */
-    addActionBarMessage(message) {
-        this.sendTitleText(message, SetTitlePacket.TYPE_SET_ACTIONBAR_MESSAGE);
+    sendActionBarMessage(message) {
+        this.sendTitle(message, SetTitlePacket.TYPE_SET_ACTIONBAR_MESSAGE);
     }
 
     /**
@@ -1241,7 +1241,7 @@ class Player extends Human {
      * @param title {string}
      * @param type {number}
      */
-    sendTitleText(title, type) {
+    sendTitle(title, type = SetTitlePacket.TYPE_SET_TITLE) {
         let pk = new SetTitlePacket();
         pk.type = type;
         pk.text = title;

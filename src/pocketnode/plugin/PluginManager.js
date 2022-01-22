@@ -178,6 +178,7 @@ class PluginManager {
         if (!(plugin instanceof Plugin)) return;
         if (plugin.isEnabled()) {
             plugin.getPluginLoader().disablePlugin(plugin);
+            plugin.onDisable();
         }
 
         //todo: cancel tasks. remove perms, handlers. etc.
